@@ -1,0 +1,30 @@
+#########
+## DB　Config
+#########
+
+## 是否使用数据库
+dbactive = false
+# 生产数据库
+# dbUrl = 127.0.0.1/p_db
+#user = 
+#password = 
+# 测试数据库
+dbUrl = 127.0.0.1/t_db
+user = 
+password = 
+#数据库连接池配置
+initsize = 20
+maxactive = 100
+# 数据库类型
+dbtype = mysql
+##########
+## App Config
+##########
+# 是否显示sql
+showSql = true
+# 开发模式
+dev = true
+# 文件上传的保存路径
+savebasedir = /var/upload
+# webapp的名称
+webappname = jfinal-oauth2.0-server
