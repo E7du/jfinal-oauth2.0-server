@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import cn.zhucongqi.oauth2.consts.Consts;
 
 /**
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class CodeResponse extends Response {

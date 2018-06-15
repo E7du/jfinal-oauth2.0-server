@@ -21,7 +21,7 @@ import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  * @param <T>
  */
@@ -31,8 +31,6 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
     protected HashMap<String, String> paramMustValues = new HashMap<String, String>();
     
     private ClientCredentials<T> customClientCredentialsValidator = null;
-    
-    protected boolean enforceClientAuthentication = false;
     
     public OAuthBaseValidator() {
         requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
@@ -49,7 +47,11 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
      */
     public abstract void paramValuesValidation();
     
-    public abstract boolean clienValidator();
+    /**
+     * enforceClientAuthentication: yes or no
+     * @return
+     */
+    public abstract boolean enforceClientAuthentication();
     
     /**
      * validate method
@@ -88,8 +90,6 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
             String val = request.getParameter(requiredParam);
             if (StrKit.isBlank(val)) {
                 missingParameters.add(requiredParam);
-                //TODO 全部提示
-//                break;
             }
         }
         if (!missingParameters.isEmpty()) {
@@ -237,7 +237,7 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
         this.validateRequiredParameters(request);
         this.validateRequiredParameterValues(request);
         this.getClientParameters(request);
-        if (this.clienValidator()) {
+        if (this.enforceClientAuthentication()) {
 			this.validateClientCredentials(request);
 		}
     }

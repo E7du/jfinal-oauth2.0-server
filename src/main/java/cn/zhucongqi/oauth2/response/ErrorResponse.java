@@ -15,7 +15,7 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
  * state : The exact value received from the
          client.
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class ErrorResponse extends Response {

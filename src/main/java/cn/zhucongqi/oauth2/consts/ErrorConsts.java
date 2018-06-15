@@ -6,7 +6,7 @@ package cn.zhucongqi.oauth2.consts;
 
 /**
  * ErrorConsts
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public final class ErrorConsts {

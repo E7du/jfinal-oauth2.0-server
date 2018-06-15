@@ -84,7 +84,7 @@ import cn.zhucongqi.oauth2.consts.Consts;
  * request and callback.The authorization server includes this value when
  * redirecting the user-agent back to the client. <br/>
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class AccessTokenValidator extends OAuthBaseValidator<HttpServletRequest> {
@@ -139,7 +139,7 @@ public class AccessTokenValidator extends OAuthBaseValidator<HttpServletRequest>
 	}
 
 	@Override
-	public boolean clienValidator() {
+	public boolean enforceClientAuthentication() {
 		return true;
 	}
 }

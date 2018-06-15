@@ -12,7 +12,7 @@ import com.jfinal.kit.StrKit;
 import cn.zhucongqi.oauth2.consts.Consts;
 
 /**
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public abstract class Response {

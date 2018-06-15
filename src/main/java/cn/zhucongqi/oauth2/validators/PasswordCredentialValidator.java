@@ -129,10 +129,8 @@ public class PasswordCredentialValidator extends OAuthBaseValidator<HttpServletR
 	}
 
 	@Override
-	public boolean clienValidator() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean enforceClientAuthentication() {
+		return true;
 	}
 
-    
 }

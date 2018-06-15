@@ -23,7 +23,6 @@ public class AuthorizationCodeValidator extends OAuthBaseValidator<HttpServletRe
         requiredParams.add(OAuth.OAUTH_CODE);
         requiredParams.add(OAuth.OAUTH_REDIRECT_URI);
         requiredParams.add(OAuth.OAUTH_CLIENT_ID);
-       // enforceClientAuthentication = true;
     }
 
 	@Override
@@ -33,9 +32,8 @@ public class AuthorizationCodeValidator extends OAuthBaseValidator<HttpServletRe
 	}
 
 	@Override
-	public boolean clienValidator() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean enforceClientAuthentication() {
+		return true;
 	}
 
 }

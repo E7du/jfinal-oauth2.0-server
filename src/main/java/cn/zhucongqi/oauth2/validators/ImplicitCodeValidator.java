@@ -194,8 +194,7 @@ public class ImplicitCodeValidator extends OAuthBaseValidator<HttpServletRequest
 	}
 
 	@Override
-	public boolean clienValidator() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean enforceClientAuthentication() {
+		return true;
 	}
 }

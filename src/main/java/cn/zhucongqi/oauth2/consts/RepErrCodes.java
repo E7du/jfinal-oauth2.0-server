@@ -4,7 +4,7 @@
 package cn.zhucongqi.oauth2.consts;
 
 /**
- * @author congqizhu
+ * @author Jobsz
  *
  */
 public class RepErrCodes {

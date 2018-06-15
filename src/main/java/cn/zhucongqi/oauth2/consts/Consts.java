@@ -19,7 +19,7 @@ public class Consts {
 	
 	/**
 	 * HttpMethod
-	 * @author BruceZCQ [zcq@zhucongqi.cn]
+	 * @author Jobsz [zcq@zhucongqi.cn]
 	 * @version
 	 */
     public static final class HttpMethod {
@@ -31,7 +31,7 @@ public class Consts {
 
     /**
      * HeaderType
-     * @author BruceZCQ [zcq@zhucongqi.cn]
+     * @author Jobsz [zcq@zhucongqi.cn]
      * @version
      */
     public static final class HeaderType {
@@ -42,7 +42,7 @@ public class Consts {
     
     /**
      * ContentType
-     * @author BruceZCQ [zcq@zhucongqi.cn]
+     * @author Jobsz [zcq@zhucongqi.cn]
      * @version
      */
     public static final class ContentType {
@@ -52,7 +52,7 @@ public class Consts {
     
     /**
      * AuthConsts
-     * @author BruceZCQ [zcq@zhucongqi.cn]
+     * @author Jobsz [zcq@zhucongqi.cn]
      * @version
      */
     public static final class AuthConsts {
@@ -84,7 +84,7 @@ public class Consts {
     
     /**
      * RepConsts
-     * @author congqizhu
+     * @author Jobsz
      *
      */
     public static final class RepConsts {
@@ -96,7 +96,7 @@ public class Consts {
     
     /**
      * GrantTypeConsts <br/>
-     * @author BruceZCQ [zcq@zhucongqi.cn]
+     * @author Jobsz [zcq@zhucongqi.cn]
      * @version
      */
     public static final class GrantType {
@@ -109,7 +109,7 @@ public class Consts {
     
     /**
      * ResponseTypeConsts <br/>
-     * @author BruceZCQ [zcq@zhucongqi.cn]
+     * @author Jobsz [zcq@zhucongqi.cn]
      * @version
      */
     public static final class ResponseType {

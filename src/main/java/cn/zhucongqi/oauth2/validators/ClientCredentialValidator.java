@@ -47,7 +47,6 @@ public class ClientCredentialValidator extends OAuthBaseValidator<HttpServletReq
 	public ClientCredentialValidator() {
     	//Value MUST be set to "client_credentials".
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
-        //enforceClientAuthentication = true;
     }
 
 	@Override
@@ -57,8 +56,7 @@ public class ClientCredentialValidator extends OAuthBaseValidator<HttpServletReq
 	}
 
 	@Override
-	public boolean clienValidator() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean enforceClientAuthentication() {
+		return true;
 	}
 }

@@ -18,7 +18,7 @@ import cn.zhucongqi.oauth2.consts.Consts.RepConsts;
  * state : The exact value received from the
          client. <br/>
          
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class AccessToken extends Response {

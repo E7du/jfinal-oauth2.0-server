@@ -13,7 +13,7 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
 
 /**
- * @author congqizhu
+ * @author Jobsz
  * @param <T>
  *
  */

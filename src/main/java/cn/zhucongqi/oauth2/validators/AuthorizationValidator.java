@@ -163,8 +163,7 @@ public class AuthorizationValidator extends OAuthBaseValidator<HttpServletReques
 	}
 
 	@Override
-	public boolean clienValidator() {
-		// TODO Auto-generated method stub
+	public boolean enforceClientAuthentication() {
 		return false;
 	}
 }

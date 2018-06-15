@@ -86,18 +86,17 @@ public class RefreshTokenValidator extends OAuthBaseValidator<HttpServletRequest
     	//Value MUST be set to "refresh_token".
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE); 
         requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);
-       // enforceClientAuthentication = true;
     }
 
+    @Override
 	public void paramValuesValidation() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean clienValidator() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean enforceClientAuthentication() {
+		return true;
 	}
 
 }
