@@ -30,7 +30,7 @@
    (B)  The authorization server authenticates the client, and if valid,
         issues an access token.
  */
-package cn.zhucongqi.oauth2.validator;
+package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -47,6 +47,18 @@ public class ClientCredentialValidator extends OAuthBaseValidator<HttpServletReq
 	public ClientCredentialValidator() {
     	//Value MUST be set to "client_credentials".
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
-        enforceClientAuthentication = true;
+        //enforceClientAuthentication = true;
     }
+
+	@Override
+	public void paramValuesValidation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean clienValidator() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

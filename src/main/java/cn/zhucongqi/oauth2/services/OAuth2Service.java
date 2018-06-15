@@ -3,35 +3,58 @@
  */
 package cn.zhucongqi.oauth2.services;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
+
+import com.jfinal.ext.core.Service;
 
 import cn.zhucongqi.oauth2.consts.Consts;
 import cn.zhucongqi.oauth2.consts.OAuth;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.issuer.MD5Generator;
-import cn.zhucongqi.oauth2.issuer.OAuthIssuer;
 import cn.zhucongqi.oauth2.issuer.OAuthIssuerKit;
 import cn.zhucongqi.oauth2.issuer.ValueGenerator;
 import cn.zhucongqi.oauth2.message.OAuthResponse;
-import cn.zhucongqi.oauth2.message.types.GrantType;
-import cn.zhucongqi.oauth2.message.types.ResponseType;
-import cn.zhucongqi.oauth2.request.OAuthGrantRequest;
-import cn.zhucongqi.oauth2.request.OAuthRequest;
 import cn.zhucongqi.oauth2.request.RequestType;
+import cn.zhucongqi.oauth2.response.AccessToken;
+import cn.zhucongqi.oauth2.response.ErrorResponse;
 import cn.zhucongqi.oauth2.response.OAuthASResponse;
-
-import com.jfinal.ext.core.Service;
+import cn.zhucongqi.oauth2.response.ResponseKit;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class OAuth2Service extends Service {
+public class OAuth2Service extends Service implements OAuth2ServiceApi {
 
 	private RequestType reqType = RequestType.GRANT_REQUEST;
 	private ValueGenerator valGenerator = new MD5Generator();
+	
+	private void repErrorToClient(HttpServletRequest request, OAuthProblemException e) {
+		// rep error to client
+		ErrorResponse errorRep = ResponseKit.errorRep(request, e);
+//		this.controller.getResponse().setStatus(e.getResponseStatus());
+		this.log.error("authproblem =>"+e.getMessage());
+		this.controller.renderJson(errorRep.param());
+	}
+	
+	private void renderAccessToken(String scope, String state, HttpServletRequest request) {
+		//generate access token
+		OAuthIssuerKit issuer = null;//OAuthIssuerKit.();
+		String accessToken = issuer.accessToken();
+		String refreshToken = issuer.refreshToken();
+		//store access token and refresh token and account
+		//rep to client
+		AccessToken accessTokenRep = ResponseKit.tokenRep(request);
+		accessTokenRep.setAccessToken(accessToken)
+		.setUid("uid")
+		.setUtype(1)
+		.setExpiresIn(Consts.TOKEN_EXPIRES_IN)
+		.setRefreshToken(refreshToken);
+		this.controller.renderJson(accessTokenRep.param());
+	}
 	
 	public OAuth2Service setReqType(RequestType reqType) {
 		this.reqType = reqType;
@@ -47,52 +70,6 @@ public class OAuth2Service extends Service {
 	 * 处理授权请求
 	 */
 	public void doOAuthAction() {
-		try {
-			OAuthResponse r = null;
-			OAuthIssuer oauthIssuer = new OAuthIssuerKit(this.valGenerator);
-			String accessToken = oauthIssuer.accessToken();
-			String refreshToken = oauthIssuer.refreshToken();
-			
-			switch (reqType) {
-			case CODE_TOKEN_REQUEST: {
-				OAuthRequest req = new OAuthRequest(
-						this.controller.getRequest());
-				// response_type : code
-				if (String.valueOf(ResponseType.CODE).equals(req.getResponseType())) {
-					String authzCode = oauthIssuer.authorizationCode();
-					r = OAuthASResponse
-							.authorizationResponse(this.controller.getRequest())
-							.setCode(authzCode)
-							.buildJSONMessage();
-				// response_type : token
-				} else if (String.valueOf(ResponseType.TOKEN).equals(req.getResponseType())) {
-					r = this.repTokenToClient(accessToken, refreshToken);
-				}
-			}
-				break;
-			// grant_type :　authorization_code, password, client_credentials
-			case GRANT_REQUEST: {
-				OAuthGrantRequest req = new OAuthGrantRequest(
-						this.controller.getRequest());
-				//authorization_code
-				if (String.valueOf(GrantType.AUTHORIZATION_CODE).equals(req.getGrantType())) {
-					//TODO 校验
-					req.getCode();
-				}else{
-					r = this.repTokenToClient(accessToken, refreshToken);
-				}
-			}
-				break;
-			}
-			this.controller.getResponse().setStatus(r.getResponseStatus());
-			this.controller.renderJson(r.getBody());
-		} catch (OAuthProblemException ex) {
-			OAuthResponse r = OAuthResponse
-					.errorBadReqResponse(this.controller.getRequest())
-					.error(ex).buildJSONMessage();
-			this.controller.getResponse().setStatus(r.getResponseStatus());
-			this.controller.renderJson(r.getBody());
-		}
 	}
 	
 	/**
@@ -173,4 +150,20 @@ public class OAuth2Service extends Service {
     private boolean validate(String id, String password) {
     	return true;
     }
+
+	@Override
+	public void authrize() {
+		
+	}
+
+	@Override
+	public void accessToken() {
+		
+	}
+
+	@Override
+	public void refreshToken() {
+		
+	}
+
 }

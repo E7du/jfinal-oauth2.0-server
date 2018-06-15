@@ -7,130 +7,238 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.jfinal.kit.StrKit;
 
-import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.clientcredentials.ClientCredentials;
+import cn.zhucongqi.oauth2.consts.Consts;
+import cn.zhucongqi.oauth2.consts.ErrorConsts;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
-import cn.zhucongqi.oauth2.kit.OAuthKit;
+import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
 
 /**
  * 
- * @author Jobsz [zcq@zhucongqi.cn]
+ * @author BruceZCQ [zcq@zhucongqi.cn]
  * @version
  * @param <T>
  */
-public abstract class OAuthBaseValidator<T extends HttpServletRequest> implements OAuthValidator<T> {
+public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
 
     protected List<String> requiredParams = new ArrayList<String>();
-    protected Map<String, String[]> optionalParams = new HashMap<String, String[]>();
-    protected List<String> notAllowedParams = new ArrayList<String>();
+    protected HashMap<String, String> paramMustValues = new HashMap<String, String>();
+    
+    private ClientCredentials<T> customClientCredentialsValidator = null;
+    
     protected boolean enforceClientAuthentication = false;
+    
+    public OAuthBaseValidator() {
+        requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
+        requiredParams.add(Consts.AuthConsts.AUTH_STATE);
+        this.paramValuesValidation();
+    }
+    
+    public void setCustomClientCredentialsValidator(ClientCredentials<T> customClientCredentialsValidator) {
+    	this.customClientCredentialsValidator = customClientCredentialsValidator;
+    }
 
-    @Override
-    public void validateMethod(T request) throws OAuthProblemException {
-        if (!request.getMethod().equals(OAuth.HttpMethod.POST)) {
-            throw OAuthKit.handleOAuthProblemException("Method not set to POST.");
+    /**
+     * param value validation 
+     */
+    public abstract void paramValuesValidation();
+    
+    public abstract boolean clienValidator();
+    
+    /**
+     * validate method
+     * @param request
+     * @throws OAuthProblemException
+     */
+    protected void validateMethod(HttpServletRequest request) throws OAuthProblemException {
+        String method = request.getMethod();
+        if (!method.equals(Consts.HttpMethod.GET) && !method.equals(Consts.HttpMethod.POST)) {
+            throw OAuthProblemException.error(ErrorConsts.CodeResponse.INVALID_REQUEST)
+                .description("Method not correct.");
         }
     }
 
-    @Override
-    public void validateContentType(T request) throws OAuthProblemException {
+    /**
+     * validate content type
+     * @param request
+     * @throws OAuthProblemException
+     */
+    protected void validateContentType(T request) throws OAuthProblemException {
         String contentType = request.getContentType();
-        final String expectedContentType = OAuth.ContentType.URL_ENCODED;
-        if (!OAuthKit.hasContentType(contentType, expectedContentType)) {
-            throw OAuthKit.handleBadContentTypeException(expectedContentType);
+        final String expectedContentType = Consts.ContentType.URL_ENCODED;
+        if (!OAuthExceptionHandleKit.hasContentType(contentType, expectedContentType)) {
+            throw OAuthExceptionHandleKit.handleBadContentTypeException(expectedContentType);
         }
     }
 
-    @Override
-    public void validateRequiredParameters(T request) throws OAuthProblemException {
+    /**
+     * validate parameter
+     * @param request
+     * @throws OAuthProblemException
+     */
+    protected void validateRequiredParameters(T request) throws OAuthProblemException {
         final Set<String> missingParameters = new HashSet<String>();
         for (String requiredParam : requiredParams) {
             String val = request.getParameter(requiredParam);
             if (StrKit.isBlank(val)) {
                 missingParameters.add(requiredParam);
+                //TODO 全部提示
+//                break;
             }
         }
         if (!missingParameters.isEmpty()) {
-            throw OAuthKit.handleMissingParameters(missingParameters);
+            throw OAuthExceptionHandleKit.handleMissingParameters(missingParameters);
         }
     }
+    
+    /**
+     * validate paramter values
+     * @param request
+     * @throws OAuthProblemException
+     */
+    protected void validateRequiredParameterValues(T request) throws OAuthProblemException {
+    	final Set<String> keys = paramMustValues.keySet();
+    	for (String key : keys) {
+			String param = request.getParameter(key);
+			String mustValue = paramMustValues.get(key);
+			if (StrKit.isBlank(param) 
+					|| (StrKit.notBlank(param) && !mustValue.equals(param))) {
+				if (key.equals(Consts.AuthConsts.AUTH_RESPONSE_TYPE)) {
+					throw OAuthExceptionHandleKit.handleInvalidResponseTypeValueException(mustValue);
+				} else if (key.equals(Consts.AuthConsts.AUTH_GRANT_TYPE)) {
+					throw OAuthExceptionHandleKit.handleInvalidGrantTypeValueException(mustValue);
+				}
+			}
+		}
+    }
+    
+    /**
+     * validateClientCredentials
+     * @param request
+     * @throws OAuthProblemException
+     */
+    private void validateClientCredentials(T request)
+			throws OAuthProblemException {
+    	// validate parameters missing
+		Set<String> missingParameters = new HashSet<String>();
+		
+		String client_id = request.getParameter(Consts.AuthConsts.AUTH_CLIENT_ID);
+		if (StrKit.isBlank(client_id)) {
+			missingParameters.add(Consts.AuthConsts.AUTH_CLIENT_ID);
+		}
+		
+		String client_secret = request.getParameter(Consts.AuthConsts.AUTH_CLIENT_SECRET);
+		if (StrKit.isBlank(client_secret)) {
+			missingParameters.add(Consts.AuthConsts.AUTH_CLIENT_SECRET);
+		}
 
-    @Override
-    public void validateOptionalParameters(T request) throws OAuthProblemException {
-        final Set<String> missingParameters = new HashSet<String>();
+		//check missing or not
+		if (!missingParameters.isEmpty()) {
+			throw OAuthExceptionHandleKit.handleMissingParameters(missingParameters);
+		}
+		
+		//validate parameters validation
+		this.customClientCredentialsValidator.validateClientCredentials(request);
+	}
+    
+    private String scope = "";
+    private String state = "";
+	private String clientId = null;
+	private String clientSecret = null;
+	private String code = null;
+    
+    public String getScope() {
+		return scope;
+	}
 
-        for (Map.Entry<String, String[]> requiredParam : optionalParams.entrySet()) {
-            final String paramName = requiredParam.getKey();
-            String val = request.getParameter(paramName);
-            if (StrKit.notBlank(val)) {
-                String[] dependentParams = requiredParam.getValue();
-                if (StrKit.notBlank(dependentParams)) {
-                    for (String dependentParam : dependentParams) {
-                        val = request.getParameter(dependentParam);
-                        if (StrKit.isBlank(val)) {
-                            missingParameters.add(dependentParam);
-                        }
-                    }
-                }
-            }
-        }
+	private void setScope(String scope) {
+		this.scope = scope;
+	}
 
-        if (!missingParameters.isEmpty()) {
-            throw OAuthKit.handleMissingParameters(missingParameters);
-        }
+	public String getState() {
+		return state;
+	}
+
+	private void setState(String state) {
+		this.state = state;
+	}
+	
+	public String getClientId() {
+		return clientId;
+	}
+
+	private void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+	public String getClientSecret() {
+		return clientSecret;
+	}
+
+	private void setClientSecret(String clientSecret) {
+		this.clientSecret = clientSecret;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	private void setCode(String code) {
+		this.code = code;
+	}
+	
+	/**
+     * get client parameters
+     * @param request
+     */
+    protected void getClientParameters(T request) {
+    	// client and secret
+    	String clientId = request.getParameter(Consts.AuthConsts.AUTH_CLIENT_ID);
+    	if (StrKit.notBlank(clientId)) {
+        	this.setClientId(clientId);	
+		}
+    	
+    	String clientSecret = request.getParameter(Consts.AuthConsts.AUTH_CLIENT_SECRET);
+    	if (StrKit.notBlank(clientSecret)) {
+        	this.setClientSecret(clientSecret);	
+		}
+    	
+    	String code = request.getParameter(Consts.AuthConsts.AUTH_CODE);
+    	if (StrKit.notBlank(code)) {
+        	this.setCode(code);	
+		}
+    	
+    	String state = request.getParameter(Consts.AuthConsts.AUTH_STATE);
+		if (StrKit.notBlank(state)) {
+			this.setState(state);
+		}
+		
+		String scope = request.getParameter(Consts.AuthConsts.AUTH_SCOPE);
+		if (StrKit.notBlank(scope)) {
+			this.setScope(scope);
+		}
     }
 
-    @Override
-    public void validateNotAllowedParameters(T request) throws OAuthProblemException {
-        List<String> notAllowedParameters = new ArrayList<String>();
-        for (String requiredParam : notAllowedParams) {
-            String val = request.getParameter(requiredParam);
-            if (StrKit.notBlank(val)) {
-                notAllowedParameters.add(requiredParam);
-            }
-        }
-        if (!notAllowedParameters.isEmpty()) {
-            throw OAuthKit.handleNotAllowedParametersOAuthException(notAllowedParameters);
-        }
-    }
-
-    @Override
-    public void validateClientAuthenticationCredentials(T request) throws OAuthProblemException {
-        if (enforceClientAuthentication) {
-            Set<String> missingParameters = new HashSet<String>();
-            String clientAuthHeader = request.getHeader(OAuth.HeaderType.AUTHORIZATION);
-            String[] clientCreds = OAuthKit.decodeClientAuthenticationHeader(clientAuthHeader);
-
-            // Only fallback to params if the auth header is not correct. Don't allow a mix of auth header vs params
-            if (clientCreds == null || StrKit.isBlank(clientCreds[0]) || StrKit.isBlank(clientCreds[1])) {
-
-                if (StrKit.isBlank(request.getParameter(OAuth.OAUTH_CLIENT_ID))) {
-                    missingParameters.add(OAuth.OAUTH_CLIENT_ID);
-                }
-                if (StrKit.isBlank(request.getParameter(OAuth.OAUTH_CLIENT_SECRET))) {
-                    missingParameters.add(OAuth.OAUTH_CLIENT_SECRET);
-                }
-            }
-
-            if (!missingParameters.isEmpty()) {
-                throw OAuthKit.handleMissingParameters(missingParameters);
-            }
-        }
-    }
-
-    @Override
-    public void performAllValidations(T request) throws OAuthProblemException {
+    /**
+     * validate request
+     * 
+     * @param request
+     * @throws OAuthProblemException
+     */
+    public void validate(T request) throws OAuthProblemException {
         this.validateContentType(request);
         this.validateMethod(request);
         this.validateRequiredParameters(request);
-        this.validateOptionalParameters(request);
-        this.validateNotAllowedParameters(request);
-        this.validateClientAuthenticationCredentials(request);
+        this.validateRequiredParameterValues(request);
+        this.getClientParameters(request);
+        if (this.clienValidator()) {
+			this.validateClientCredentials(request);
+		}
     }
 }

@@ -63,7 +63,7 @@
    identical to that of the refresh token included by the client in the
    request.
  */
-package cn.zhucongqi.oauth2.validator;
+package cn.zhucongqi.oauth2.validators;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,7 +86,18 @@ public class RefreshTokenValidator extends OAuthBaseValidator<HttpServletRequest
     	//Value MUST be set to "refresh_token".
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE); 
         requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);
-        enforceClientAuthentication = true;
+       // enforceClientAuthentication = true;
     }
+
+	public void paramValuesValidation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean clienValidator() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

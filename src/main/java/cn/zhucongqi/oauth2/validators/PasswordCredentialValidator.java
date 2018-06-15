@@ -100,7 +100,7 @@
    brute force attacks (e.g., using rate-limitation or generating
    alerts)
  */
-package cn.zhucongqi.oauth2.validator;
+package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -119,7 +119,20 @@ public class PasswordCredentialValidator extends OAuthBaseValidator<HttpServletR
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
         requiredParams.add(OAuth.OAUTH_USERNAME);
         requiredParams.add(OAuth.OAUTH_PASSWORD);
-        enforceClientAuthentication = true;
+        //enforceClientAuthentication = true;
     }
+
+	@Override
+	public void paramValuesValidation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean clienValidator() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
     
 }

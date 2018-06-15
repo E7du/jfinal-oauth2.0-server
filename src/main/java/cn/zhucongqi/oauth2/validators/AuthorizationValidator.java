@@ -120,7 +120,7 @@
    redirection response, or by other means available to it via the
    user-agent.
  */
-package cn.zhucongqi.oauth2.validator;
+package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -155,5 +155,17 @@ public class AuthorizationValidator extends OAuthBaseValidator<HttpServletReques
     @Override
     public void validateContentType(HttpServletRequest request) throws OAuthProblemException {
     }
+
+	@Override
+	public void paramValuesValidation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean clienValidator() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 

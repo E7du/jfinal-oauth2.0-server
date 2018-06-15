@@ -6,6 +6,7 @@ package cn.zhucongqi.oauth2.controllers;
 import com.jfinal.core.ActionKey;
 import com.jfinal.ext.core.ControllerExt;
 
+import cn.zhucongqi.oauth2.consts.ActionUrls;
 import cn.zhucongqi.oauth2.issuer.MD5Generator;
 import cn.zhucongqi.oauth2.issuer.ValueGenerator;
 import cn.zhucongqi.oauth2.request.RequestType;
@@ -41,7 +42,7 @@ public class OAuth2Controller extends ControllerExt {
 	 * using OAuthRequest <br/>
 	 * AuthorizationValidator <br/>
 	 */
-	@ActionKey("oauth2/authorize")
+	@ActionKey(ActionUrls.AUTHORIZE_URL)
 	public void onAuthorize() {
 		this.codeTokenReqLinkToOAuthRequest();
 	}
@@ -52,7 +53,7 @@ public class OAuth2Controller extends ControllerExt {
 	 * using OAuthGrantRequest <br/>
 	 * AuthorizationCodeValidator <br/>
 	 */
-	@ActionKey("oauth2/authorize_code")
+	@ActionKey(ActionUrls.AUTHORIZE_CODE_URL)
 	public void onAuthorizeCode() {
 		this.grantReqLinkToOAuthGrantRequest();
 	}
@@ -64,7 +65,7 @@ public class OAuth2Controller extends ControllerExt {
 	 * PasswordCredentialValidator <br/>
 	 * ClientCredentialValidator <br/>
 	 */
-	@ActionKey("oauth2/secure_access_token")
+	@ActionKey(ActionUrls.SECURE_ACCESS_TOKEN_URL)
 	public void onAccessTokenSecure() {
 		this.grantReqLinkToOAuthGrantRequest();
 	}
@@ -76,7 +77,7 @@ public class OAuth2Controller extends ControllerExt {
 	 * using OAuthRequest <br/>
 	 * ImplicitCodeValidator <br/>
 	 */
-	@ActionKey("oauth2/access_token")
+	@ActionKey(ActionUrls.ACCESS_TOKEN_URL)
 	public void onAcessToken() {
 		this.codeTokenReqLinkToOAuthRequest();
 	}
@@ -87,7 +88,7 @@ public class OAuth2Controller extends ControllerExt {
 	 * using OAuthGrantRequest <br/>
 	 * RefreshTokenValidator <br/>
 	 */
-	@ActionKey("oauth2/refresh_token")
+	@ActionKey(ActionUrls.REFRESH_TOKEN_URL)
 	public void onRefreshToken() {	
 		this.grantReqLinkToOAuthGrantRequest();
 	}

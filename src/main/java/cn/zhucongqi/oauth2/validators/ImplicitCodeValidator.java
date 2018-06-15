@@ -151,7 +151,7 @@
    user-agent.
  */
 
-package cn.zhucongqi.oauth2.validator;
+package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -186,4 +186,16 @@ public class ImplicitCodeValidator extends OAuthBaseValidator<HttpServletRequest
     @Override
     public void validateContentType(HttpServletRequest request) throws OAuthProblemException {
     }
+
+	@Override
+	public void paramValuesValidation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean clienValidator() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
