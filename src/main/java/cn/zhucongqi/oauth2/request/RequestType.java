@@ -4,7 +4,7 @@
 package cn.zhucongqi.oauth2.request;
 
 /**
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public enum RequestType {

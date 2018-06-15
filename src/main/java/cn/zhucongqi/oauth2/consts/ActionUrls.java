@@ -5,7 +5,7 @@ package cn.zhucongqi.oauth2.consts;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class ActionUrls {

@@ -3,25 +3,28 @@
  */
 package cn.zhucongqi.oauth2.controllers;
 
-import cn.zhucongqi.oauth2.issuer.MD5Generator;
-import cn.zhucongqi.oauth2.request.RequestType;
-import cn.zhucongqi.oauth2.services.OAuth2Service;
-
 import com.jfinal.core.ActionKey;
 import com.jfinal.ext.core.ControllerExt;
 
+import cn.zhucongqi.oauth2.issuer.MD5Generator;
+import cn.zhucongqi.oauth2.issuer.ValueGenerator;
+import cn.zhucongqi.oauth2.request.RequestType;
+import cn.zhucongqi.oauth2.services.OAuth2Service;
+
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class OAuth2Controller extends ControllerExt {
 	
 	private OAuth2Service _auth2Service;
 
+	private ValueGenerator valueGenerator = new MD5Generator();
+	
 	private void codeTokenReqLinkToOAuthRequest() {
 		_auth2Service.setReqType(RequestType.CODE_TOKEN_REQUEST)
-				.setValGenerator(new MD5Generator()).doOAuthAction();
+				.setValGenerator(valueGenerator).doOAuthAction();
 	}
 
 	private void grantReqLinkToOAuthGrantRequest() {
@@ -29,7 +32,7 @@ public class OAuth2Controller extends ControllerExt {
 			return;
 		}
 		_auth2Service.setReqType(RequestType.GRANT_REQUEST)
-				.setValGenerator(new MD5Generator()).doOAuthAction();
+				.setValGenerator(valueGenerator).doOAuthAction();
 	}
 
 	/**
@@ -91,7 +94,6 @@ public class OAuth2Controller extends ControllerExt {
 
 	@Override
 	public void onExceptionError(Exception e) {
-		// TODO Auto-generated method stub
 		
 	}
 	

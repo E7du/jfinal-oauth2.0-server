@@ -109,7 +109,7 @@ import cn.zhucongqi.oauth2.consts.OAuth;
 
 /**
  * Resource Owner Password Credentials Grant
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class PasswordCredentialValidator extends OAuthBaseValidator<HttpServletRequest> {

@@ -5,7 +5,7 @@ package cn.zhucongqi.oauth2.consts;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class Consts {
@@ -14,5 +14,7 @@ public class Consts {
 	 * CaptchaRender random key
 	 */
 	public static final String CAPTCHA_RDNDOM_KEY = "captcha";
+	
+	public static final String TOKEN_EXPIRES_IN = "3600";
 	
 }

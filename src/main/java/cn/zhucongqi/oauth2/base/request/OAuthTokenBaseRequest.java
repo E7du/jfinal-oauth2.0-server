@@ -17,7 +17,7 @@ import com.jfinal.kit.StrKit;
 /**
  * Abstract OAuth Token request class
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public abstract class OAuthTokenBaseRequest extends OAuthBaseRequest {

@@ -132,7 +132,7 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 /**
  * Authorization Code Grant
  * Authorization Request
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class AuthorizationValidator extends OAuthBaseValidator<HttpServletRequest> {

@@ -8,7 +8,7 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  * @param <T>
  */

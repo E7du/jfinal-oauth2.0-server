@@ -39,7 +39,7 @@ import cn.zhucongqi.oauth2.consts.OAuth;
 
 /**
  * Client Credentials Grant
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class ClientCredentialValidator extends OAuthBaseValidator<HttpServletRequest> {

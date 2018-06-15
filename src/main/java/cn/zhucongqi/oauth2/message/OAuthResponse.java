@@ -18,7 +18,7 @@ import cn.zhucongqi.oauth2.parameters.JSONBodyParametersApplier;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class OAuthResponse implements OAuthMessage {

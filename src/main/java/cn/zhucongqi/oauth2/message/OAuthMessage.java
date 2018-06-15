@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public interface OAuthMessage {

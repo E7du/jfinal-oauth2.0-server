@@ -163,7 +163,7 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
 /**
  * Implicit Grant
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class ImplicitCodeValidator extends OAuthBaseValidator<HttpServletRequest> {

@@ -34,7 +34,7 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 /**
  * Common OAuth Utils class.
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public final class OAuthKit {

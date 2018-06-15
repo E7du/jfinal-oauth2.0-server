@@ -6,7 +6,7 @@ package cn.zhucongqi.oauth2.consts;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public abstract class OAuthError {
@@ -53,7 +53,7 @@ public abstract class OAuthError {
         public static final String SERVER_ERROR = "server_error";
 
         /**
-         *         The authorization server is currently unable to handle
+         * The authorization server is currently unable to handle
         the request due to a temporary overloading or maintenance
         of the server.
          */

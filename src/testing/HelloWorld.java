@@ -3,7 +3,7 @@
  */
 
 /**
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class HelloWorld implements Hello {

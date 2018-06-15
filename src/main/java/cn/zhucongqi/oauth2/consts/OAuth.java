@@ -8,7 +8,7 @@ import cn.zhucongqi.oauth2.message.types.TokenType;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public final class OAuth {

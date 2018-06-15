@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
 
+import cn.zhucongqi.oauth2.consts.Consts;
 import cn.zhucongqi.oauth2.consts.OAuth;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.issuer.MD5Generator;
@@ -24,7 +25,7 @@ import cn.zhucongqi.oauth2.response.OAuthASResponse;
 import com.jfinal.ext.core.Service;
 
 /**
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class OAuth2Service extends Service {
@@ -105,7 +106,7 @@ public class OAuth2Service extends Service {
 				.tokenResponse()
 				.setAccessToken(accessToken)
 				.setRefreshToken(refreshToken)
-				.setExpiresIn("3600")
+				.setExpiresIn(Consts.TOKEN_EXPIRES_IN)
 				.setExampleParamter("exampleValue").buildJSONMessage();
 	}
 	

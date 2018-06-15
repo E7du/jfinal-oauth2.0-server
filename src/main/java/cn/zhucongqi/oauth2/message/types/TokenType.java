@@ -5,7 +5,7 @@ package cn.zhucongqi.oauth2.message.types;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public enum TokenType {

@@ -19,7 +19,7 @@ import com.jfinal.kit.StrKit;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class OAuthRequest extends OAuthBaseRequest {

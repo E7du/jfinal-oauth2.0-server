@@ -23,7 +23,7 @@ import cn.zhucongqi.oauth2.validator.RefreshTokenValidator;
  * IMPORTANT: This OAuthTokenRequest assumes that a token request requires client authentication.
  * Please see section 3.2.1 of the OAuth Specification: http://tools.ietf.org/html/rfc6749#section-3.2.1
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class OAuthGrantRequest extends OAuthTokenBaseRequest {

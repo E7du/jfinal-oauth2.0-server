@@ -11,14 +11,11 @@ import com.jfinal.kit.StrKit;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class OAuthProblemException extends IllegalArgumentException {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1536483571040822380L;
 	private String error;
     private String description;

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class UUIDValueGenerator extends ValueGenerator {

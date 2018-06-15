@@ -18,7 +18,7 @@ import cn.zhucongqi.oauth2.kit.OAuthKit;
 /**
  * The Abstract OAuth request for the Authorization server.
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public abstract class OAuthBaseRequest {

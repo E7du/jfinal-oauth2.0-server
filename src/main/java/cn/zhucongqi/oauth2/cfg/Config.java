@@ -16,7 +16,7 @@ import com.jfinal.template.Engine;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class Config extends JFinalConfigExt {

@@ -5,7 +5,7 @@ package cn.zhucongqi.oauth2.data;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class DataKit {

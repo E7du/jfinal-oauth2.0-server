@@ -7,7 +7,7 @@ import com.jfinal.kit.HashKit;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class MD5Generator extends ValueGenerator {

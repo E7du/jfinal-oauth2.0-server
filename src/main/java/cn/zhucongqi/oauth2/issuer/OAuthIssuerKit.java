@@ -6,7 +6,7 @@ package cn.zhucongqi.oauth2.issuer;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class OAuthIssuerKit implements OAuthIssuer {

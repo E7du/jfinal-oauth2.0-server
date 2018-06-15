@@ -14,7 +14,7 @@ import cn.zhucongqi.oauth2.message.types.TokenType;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class OAuthASResponse extends OAuthResponse {

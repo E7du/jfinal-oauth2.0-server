@@ -12,7 +12,7 @@ import cn.zhucongqi.oauth2.consts.OAuth;
  * Validator that checks for the required fields in an OAuth Token request with the Authorization Code grant type.
  * This validator enforces client authentication either through basic authentication or body parameters.
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class AuthorizationCodeValidator extends OAuthBaseValidator<HttpServletRequest> {

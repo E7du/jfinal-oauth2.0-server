@@ -77,7 +77,7 @@ import cn.zhucongqi.oauth2.consts.OAuth;
  *
  * http://www.rfcreader.com/#rfc6749
  * 6.  Refreshing an Access Token
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
 public class RefreshTokenValidator extends OAuthBaseValidator<HttpServletRequest> {

@@ -20,7 +20,7 @@ import cn.zhucongqi.oauth2.kit.OAuthKit;
 
 /**
  * 
- * @author BruceZCQ [zcq@zhucongqi.cn]
+ * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  * @param <T>
  */
