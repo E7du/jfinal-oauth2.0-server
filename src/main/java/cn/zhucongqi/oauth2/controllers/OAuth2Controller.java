@@ -8,7 +8,7 @@ import cn.zhucongqi.oauth2.request.RequestType;
 import cn.zhucongqi.oauth2.services.OAuth2Service;
 
 import com.jfinal.core.ActionKey;
-import com.jfinal.ext2.core.ControllerExt;
+import com.jfinal.ext.core.ControllerExt;
 
 /**
  * 

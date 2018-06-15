@@ -14,22 +14,27 @@
 	</licenses>
 	<developers>
 		<developer>
-			<name>BruceZCQ</name>
+			<name>Jobsz</name>
 			<email>zcq@zhucongqi.cn</email>
 			<organization>OpeningO Co.,Ltd.</organization>
 			<organizationUrl>http://openingo.github.io/</organizationUrl>
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:git@github.com:OpeningO/jfinal-oauth2.0-server.git</connection>
-		<developerConnection>scm:git:git@github.com:OpeningO/jfinal-oauth2.0-server.git</developerConnection>
-		<url>git@github.com:OpeningO/jfinal-oauth2.0-server.git</url>
+		<connection>scm:git:git@github.com:E7du/jfinal-oauth2.0-server.git</connection>
+		<developerConnection>scm:git:git@github.com:E7du/jfinal-oauth2.0-server.git</developerConnection>
+		<url>git@github.com:E7du/jfinal-oauth2.0-server.git</url>
 	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>com.jfinal</groupId>
-			<artifactId>jfinal-ext2</artifactId>
-			<version>2.0.3</version>
+			<artifactId>jfinal-ext3</artifactId>
+			<version>3.0.0.SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jfinal-e7du</artifactId>
+			<version>3.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>

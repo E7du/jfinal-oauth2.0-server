@@ -21,7 +21,7 @@ import cn.zhucongqi.oauth2.request.OAuthRequest;
 import cn.zhucongqi.oauth2.request.RequestType;
 import cn.zhucongqi.oauth2.response.OAuthASResponse;
 
-import com.jfinal.ext2.core.Service;
+import com.jfinal.ext.core.Service;
 
 /**
  * @author BruceZCQ [zcq@zhucongqi.cn]

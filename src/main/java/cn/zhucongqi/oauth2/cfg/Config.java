@@ -10,8 +10,9 @@ import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
-import com.jfinal.ext2.config.JFinalConfigExt;
+import com.jfinal.ext.config.JFinalConfigExt;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.template.Engine;
 
 /**
  * 
@@ -51,6 +52,11 @@ public class Config extends JFinalConfigExt {
 
 	@Override
 	public void configMoreHandlers(Handlers me) {
+		
+	}
+
+	@Override
+	public void configEngine(Engine me) {
 		
 	}
 }
