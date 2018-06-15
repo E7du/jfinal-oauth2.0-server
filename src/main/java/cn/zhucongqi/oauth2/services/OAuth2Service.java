@@ -155,9 +155,19 @@ public class OAuth2Service extends Service implements OAuth2ServiceApi {
 	public void authrize() {
 		
 	}
+	
+	@Override
+	public void authrizeCode() {
+		
+	}
 
 	@Override
 	public void accessToken() {
+		
+	}
+	
+	@Override
+	public void secureAccessToken() {
 		
 	}
 

@@ -29,10 +29,11 @@ public interface OAuth2ServiceApi {
      * Failure => <br/>
      * error : ErrorConsts.TokenResponse <br/>
      * error_description : the erros repsonse description <br/>
-     * state : The exact value received from the
-         client.
+     * state : The exact value received from the client.
 	 */
 	public void authrize();
+	
+	public void authrizeCode();
 	
 	/**
 	 * Access Token Request <br/>
@@ -78,6 +79,8 @@ public interface OAuth2ServiceApi {
          client.
 	 */
 	public void accessToken();
+	
+	public void secureAccessToken();
 	
 	/**
 	 * Refreshing an Access Token <br/>

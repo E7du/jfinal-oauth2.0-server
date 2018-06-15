@@ -7,9 +7,6 @@ import com.jfinal.core.ActionKey;
 import com.jfinal.ext.core.ControllerExt;
 
 import cn.zhucongqi.oauth2.consts.ActionUrls;
-import cn.zhucongqi.oauth2.issuer.MD5Generator;
-import cn.zhucongqi.oauth2.issuer.ValueGenerator;
-import cn.zhucongqi.oauth2.request.RequestType;
 import cn.zhucongqi.oauth2.services.OAuth2Service;
 
 /**
@@ -21,21 +18,6 @@ public class OAuth2Controller extends ControllerExt {
 	
 	private OAuth2Service _auth2Service;
 
-	private ValueGenerator valueGenerator = new MD5Generator();
-	
-	private void codeTokenReqLinkToOAuthRequest() {
-		_auth2Service.setReqType(RequestType.CODE_TOKEN_REQUEST)
-				.setValGenerator(valueGenerator).doOAuthAction();
-	}
-
-	private void grantReqLinkToOAuthGrantRequest() {
-		if (!_auth2Service.isAuthorizationed()) {
-			return;
-		}
-		_auth2Service.setReqType(RequestType.GRANT_REQUEST)
-				.setValGenerator(valueGenerator).doOAuthAction();
-	}
-
 	/**
 	 * generate code 
 	 * <br/>
@@ -44,7 +26,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.AUTHORIZE_URL)
 	public void onAuthorize() {
-		this.codeTokenReqLinkToOAuthRequest();
+		this._auth2Service.authrize();
 	}
 
 	/**
@@ -55,7 +37,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.AUTHORIZE_CODE_URL)
 	public void onAuthorizeCode() {
-		this.grantReqLinkToOAuthGrantRequest();
+		this._auth2Service.authrizeCode();
 	}
 	
 	/**
@@ -67,7 +49,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.SECURE_ACCESS_TOKEN_URL)
 	public void onAccessTokenSecure() {
-		this.grantReqLinkToOAuthGrantRequest();
+		this._auth2Service.secureAccessToken();
 	}
 	
 
@@ -79,7 +61,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.ACCESS_TOKEN_URL)
 	public void onAcessToken() {
-		this.codeTokenReqLinkToOAuthRequest();
+		this._auth2Service.accessToken();
 	}
 	
 	/**
@@ -90,7 +72,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.REFRESH_TOKEN_URL)
 	public void onRefreshToken() {	
-		this.grantReqLinkToOAuthGrantRequest();
+		this._auth2Service.refreshToken();
 	}
 
 	@Override
