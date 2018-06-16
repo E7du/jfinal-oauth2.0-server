@@ -45,8 +45,7 @@ import cn.zhucongqi.oauth2.consts.OAuth;
 public class ClientCredentialValidator extends OAuthBaseValidator<HttpServletRequest> {
    
 	public ClientCredentialValidator() {
-    	//Value MUST be set to "client_credentials".
-        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
+        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "client_credentials".
     }
 
 	@Override

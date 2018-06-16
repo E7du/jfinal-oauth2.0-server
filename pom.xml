@@ -33,7 +33,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.jfinal</groupId>
-			<artifactId>jfinal-e7du</artifactId>
+			<artifactId>jfinal</artifactId>
 			<version>3.4</version>
 		</dependency>
 		<dependency>

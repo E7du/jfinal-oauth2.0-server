@@ -22,7 +22,7 @@ public class OAuth2Controller extends ControllerExt {
 	 * generate code 
 	 * <br/>
 	 * using OAuthRequest <br/>
-	 * AuthorizationValidator <br/>
+	 * IGAuthorizationRequestValidator <br/>
 	 */
 	@ActionKey(ActionUrls.AUTHORIZE_URL)
 	public void onAuthorize() {
@@ -33,7 +33,7 @@ public class OAuth2Controller extends ControllerExt {
 	 * validate code
 	 * <br/>
 	 * using OAuthGrantRequest <br/>
-	 * AuthorizationCodeValidator <br/>
+	 * AccessTokenRequestValidator <br/>
 	 */
 	@ActionKey(ActionUrls.AUTHORIZE_CODE_URL)
 	public void onAuthorizeCode() {
@@ -57,7 +57,7 @@ public class OAuth2Controller extends ControllerExt {
 	 * get access token
 	 * <br/>
 	 * using OAuthRequest <br/>
-	 * ImplicitCodeValidator <br/>
+	 * ImplicitValidator <br/>
 	 */
 	@ActionKey(ActionUrls.ACCESS_TOKEN_URL)
 	public void onAcessToken() {

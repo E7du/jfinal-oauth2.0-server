@@ -29,6 +29,12 @@ public final class ErrorConsts {
         public static final String INVALID_REQUEST = "invalid_request";
         
         /**
+         * The client is not authorized to request an authorization
+               code using this method.
+         */
+        public static final String UNAUTHORIZED_CLIENT = "unauthorized_client";
+        
+        /**
          * The resource owner or authorization server denied the
         request.
          */

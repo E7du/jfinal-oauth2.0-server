@@ -83,9 +83,8 @@ import cn.zhucongqi.oauth2.consts.OAuth;
 public class RefreshTokenValidator extends OAuthBaseValidator<HttpServletRequest> {
 
     public RefreshTokenValidator() {
-    	//Value MUST be set to "refresh_token".
-        requiredParams.add(OAuth.OAUTH_GRANT_TYPE); 
-        requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);
+        requiredParams.add(OAuth.OAUTH_GRANT_TYPE); //Value MUST be set to "refresh_token".
+        requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);//REQUIRED.  The refresh token issued to the client.
     }
 
     @Override

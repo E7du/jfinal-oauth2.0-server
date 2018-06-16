@@ -115,11 +115,9 @@ import cn.zhucongqi.oauth2.consts.OAuth;
 public class PasswordCredentialValidator extends OAuthBaseValidator<HttpServletRequest> {
 
     public PasswordCredentialValidator() {
-    	// Value MUST be set to "password"
-        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
-        requiredParams.add(OAuth.OAUTH_USERNAME);
-        requiredParams.add(OAuth.OAUTH_PASSWORD);
-        //enforceClientAuthentication = true;
+        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "password".
+        requiredParams.add(OAuth.OAUTH_USERNAME);// REQUIRED.  The resource owner username.
+        requiredParams.add(OAuth.OAUTH_PASSWORD);//REQUIRED.  The resource owner password.
     }
 
 	@Override

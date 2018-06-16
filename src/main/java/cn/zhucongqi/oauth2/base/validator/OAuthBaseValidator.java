@@ -35,7 +35,6 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
     public OAuthBaseValidator() {
         requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
         requiredParams.add(Consts.AuthConsts.AUTH_STATE);
-        this.paramValuesValidation();
     }
     
     public void setCustomClientCredentialsValidator(ClientCredentials<T> customClientCredentialsValidator) {
@@ -101,6 +100,7 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
      * validate paramter values
      * @param request
      * @throws OAuthProblemException
+     * TODO 没有完成准确的测试
      */
     protected void validateRequiredParameterValues(T request) throws OAuthProblemException {
     	final Set<String> keys = paramMustValues.keySet();
@@ -236,6 +236,7 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
         this.validateMethod(request);
         this.validateRequiredParameters(request);
         this.validateRequiredParameterValues(request);
+        this.paramValuesValidation();//TODO 测试不同的 Request 的 Values
         this.getClientParameters(request);
         if (this.enforceClientAuthentication()) {
 			this.validateClientCredentials(request);

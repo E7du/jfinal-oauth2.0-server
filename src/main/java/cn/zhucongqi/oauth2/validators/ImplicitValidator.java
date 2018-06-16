@@ -166,12 +166,11 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class ImplicitCodeValidator extends OAuthBaseValidator<HttpServletRequest> {
+public class ImplicitValidator extends OAuthBaseValidator<HttpServletRequest> {
 
-    public ImplicitCodeValidator() {
-    	//Value MUST be set to "token".
-        requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);
-        requiredParams.add(OAuth.OAUTH_CLIENT_ID);
+    public ImplicitValidator() {
+        requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);//REQUIRED.  Value MUST be set to "token".
+        requiredParams.add(OAuth.OAUTH_CLIENT_ID);//REQUIRED.  The client identifier as described in Section 2.2.
     }
 
     @Override
