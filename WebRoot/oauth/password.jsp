@@ -12,11 +12,10 @@
 <body>
 <form action="<%=request.getContextPath()%>/oauth2/secure_access_token" method="post">
 <input type="hidden" value="password" name="grant_type"/>
-username : <input type="text" value="" name="username"/> <br/>
-password :<input type="text" value="" name="password"/> <br/>
-client_id :　<input type="text" value="" name="client_id"/> <br/>
-client_secret : <input type="text" value="" name="client_secret"/>
-<input type="hidden" value="stateasadas" name="state"/>
+username : <input type="text" value="name" name="username"/> <br/>
+password :<input type="text" value="pwd" name="password"/> <br/>
+state :<input type="text" value="stateasadas" name="state"/><br/>
+scope :<input type="text" value="sssssssope" name="scope"/><br/>
 <input type="submit" value="token"/>
 </form>
 </body>

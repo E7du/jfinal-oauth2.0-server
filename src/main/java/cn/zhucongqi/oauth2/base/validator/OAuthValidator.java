@@ -117,34 +117,6 @@ public abstract class OAuthValidator {
 		}
     }
     
-    /**
-     * validateClientCredentials
-     * @throws OAuthProblemException
-     */
-    private void validateClientCredentials()
-			throws OAuthProblemException {
-    	// validate parameters missing
-		Set<String> missingParameters = new HashSet<String>();
-		
-		String client_id = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CLIENT_ID);
-		if (StrKit.isBlank(client_id)) {
-			missingParameters.add(OAuthConsts.OAuth.OAUTH_CLIENT_ID);
-		}
-		
-		String client_secret = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CLIENT_SECRET);
-		if (StrKit.isBlank(client_secret)) {
-			missingParameters.add(OAuthConsts.OAuth.OAUTH_CLIENT_SECRET);
-		}
-
-		//check missing or not
-		if (!missingParameters.isEmpty()) {
-			throw OAuthExceptionHandleKit.handleMissingParameters(missingParameters);
-		}
-		
-		//client credentials validation
-		this.clientCredentials.validateClientCredentials(this.request);
-	}
-    
     private String scope = "DEFAULT SCOPE";
     private String state = "DEFAULT STATE";
 	private String clientId = "DEFAULT CLIENT_ID";
@@ -235,7 +207,8 @@ public abstract class OAuthValidator {
         this.validateParameterDefaultValues();
         
         this.initClientParameters();
-        //client credentials
-		this.validateClientCredentials();
+		
+		//client credentials validation
+		this.clientCredentials.validateClientCredentials(this.request);
     }
 }

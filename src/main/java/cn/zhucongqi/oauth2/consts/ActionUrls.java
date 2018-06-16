@@ -10,7 +10,7 @@ package cn.zhucongqi.oauth2.consts;
  */
 public class ActionUrls {
 	
-	public static final String BASE_URL = "auth/";
+	public static final String BASE_URL = "oauth2/";
 	// authrize url
 	public static final String AUTHORIZE_URL = BASE_URL + "authorize";
 	// authrize code url

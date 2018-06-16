@@ -3,8 +3,12 @@
  */
 package cn.zhucongqi.oauth2.controllers;
 
+import javax.management.RuntimeErrorException;
+
+import com.jfinal.aop.Before;
 import com.jfinal.core.ActionKey;
 import com.jfinal.ext.core.ControllerExt;
+import com.jfinal.ext.interceptor.OnExceptionInterceptorExt;
 
 import cn.zhucongqi.oauth2.consts.ActionUrls;
 import cn.zhucongqi.oauth2.services.OAuthService;
@@ -14,6 +18,7 @@ import cn.zhucongqi.oauth2.services.OAuthService;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
+@Before(OnExceptionInterceptorExt.class)
 public class OAuth2Controller extends ControllerExt {
 	
 	//using ControllerExt auto init the service instance
@@ -62,7 +67,9 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.ACCESS_TOKEN_URL)
 	public void onAcessToken() {
-		this.oauthService.accessToken();
+		throw new RuntimeErrorException(null);
+		
+		//this.oauthService.accessToken();
 	}
 	
 	/**

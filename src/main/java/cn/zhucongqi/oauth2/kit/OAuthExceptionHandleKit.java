@@ -25,7 +25,7 @@ public class OAuthExceptionHandleKit {
 
 	private static OAuthProblemException handleInvalidReqOAuthProblemException(
 			String message) {
-		return OAuthProblemException.error(RepErrCodes.REQ_ERR_CODE).description(message);
+		return OAuthProblemException.error(RepErrCodes.REQ_ERR_CODE, message);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class OAuthExceptionHandleKit {
 	public static OAuthProblemException handleInvalidValueException(String paramKey,
 			String validValue) {
 		StringBuilder desc = new StringBuilder(
-				"Invalid value for ").append(validValue).append("the valid value is ").append(validValue);
+				"Invalid value for ").append(validValue).append(" the valid value is '").append(validValue).append("'");
 		return OAuthProblemException
 				.error(RepErrCodes.REQ_ERR_CODE)
 				.description(desc.toString().trim())

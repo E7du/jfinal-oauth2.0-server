@@ -72,12 +72,24 @@ public class OAuthService extends Service implements OAuthApi {
 			request.validate();
 		} catch (OAuthProblemException e) {
 			e.printStackTrace();
+			this.controller.onExceptionError(e);
 		}
+		
+		this.controller.renderJson(req.getParameterMap());
 	}
 	
 	@Override
 	public void secureAccessToken() {
+		HttpServletRequest req = this.controller.getRequest();
+		OAuthRequest request = new OAuthRequest(req, OAuthRequestConsts.PASSOWRD_CREDENTIAL_REQUEST);
+		try {
+			request.validate();
+		} catch (OAuthProblemException e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
+		this.controller.renderJson(req.getParameterMap());
 	}
 
 	@Override
