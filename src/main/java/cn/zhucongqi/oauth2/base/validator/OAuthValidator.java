@@ -22,14 +22,14 @@ import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
  * @version
  * @param <T>
  */
-public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
+public abstract class OAuthValidator<T extends HttpServletRequest> {
 
     protected List<String> requiredParams = new ArrayList<String>();
     protected HashMap<String, String> paramDefaultValues = new HashMap<String, String>();
     
     private ClientCredentials<T> customClientCredentialsValidator = null;
     
-    public OAuthBaseValidator() {
+    public OAuthValidator() {
     	requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
         requiredParams.add(Consts.AuthConsts.AUTH_STATE);
         this.paramDefaultValuesValidation();

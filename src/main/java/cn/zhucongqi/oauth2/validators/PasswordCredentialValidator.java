@@ -104,7 +104,7 @@ package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.zhucongqi.oauth2.base.validator.OAuthBaseValidator;
+import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.OAuth;
 import cn.zhucongqi.oauth2.message.types.GrantType;
 
@@ -113,7 +113,7 @@ import cn.zhucongqi.oauth2.message.types.GrantType;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class PasswordCredentialValidator extends OAuthBaseValidator<HttpServletRequest> {
+public class PasswordCredentialValidator extends OAuthValidator<HttpServletRequest> {
 
     public PasswordCredentialValidator() {
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "password".

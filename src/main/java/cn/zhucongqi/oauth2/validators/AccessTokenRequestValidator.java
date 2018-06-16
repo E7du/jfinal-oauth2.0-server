@@ -51,14 +51,14 @@ package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.zhucongqi.oauth2.base.validator.OAuthBaseValidator;
+import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.OAuth;
 import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
  */
-public class AccessTokenRequestValidator extends OAuthBaseValidator<HttpServletRequest> {
+public class AccessTokenRequestValidator extends OAuthValidator<HttpServletRequest> {
 
     public AccessTokenRequestValidator() {
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "authorization_code".

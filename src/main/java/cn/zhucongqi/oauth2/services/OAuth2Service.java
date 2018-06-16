@@ -12,7 +12,7 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.issuer.MD5Generator;
 import cn.zhucongqi.oauth2.issuer.OAuthIssuerKit;
 import cn.zhucongqi.oauth2.issuer.ValueGenerator;
-import cn.zhucongqi.oauth2.request.RequestType;
+import cn.zhucongqi.oauth2.message.types.RequestType;
 import cn.zhucongqi.oauth2.response.AccessToken;
 import cn.zhucongqi.oauth2.response.ErrorResponse;
 import cn.zhucongqi.oauth2.response.ResponseKit;

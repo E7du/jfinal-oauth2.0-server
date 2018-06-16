@@ -93,14 +93,14 @@ package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.zhucongqi.oauth2.base.validator.OAuthBaseValidator;
+import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.OAuth;
 import cn.zhucongqi.oauth2.message.types.ResponseType;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
  */
-public class AuthorizationRequestValidator extends OAuthBaseValidator<HttpServletRequest> {
+public class AuthorizationRequestValidator extends OAuthValidator<HttpServletRequest> {
 
     public AuthorizationRequestValidator() {
         requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);//REQUIRED.  Value MUST be set to "code".

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.zhucongqi.oauth2.request;
+package cn.zhucongqi.oauth2.message.types;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]

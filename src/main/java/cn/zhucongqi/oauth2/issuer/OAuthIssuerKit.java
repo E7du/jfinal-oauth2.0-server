@@ -13,10 +13,18 @@ public class OAuthIssuerKit implements OAuthIssuer {
 
     private ValueGenerator vg;
 
-    public OAuthIssuerKit(ValueGenerator vg) {
+    private OAuthIssuerKit(ValueGenerator vg) {
         this.vg = vg;
     }
 
+    public static OAuthIssuerKit md5Issuer() {
+    	return (new OAuthIssuerKit(new MD5Generator()));
+    }
+    
+    public static OAuthIssuerKit uuidIssuer() {
+    	return (new OAuthIssuerKit(new UUIDValueGenerator()));
+    }
+    
     public String accessToken() {
         return vg.generateValue();
     }
