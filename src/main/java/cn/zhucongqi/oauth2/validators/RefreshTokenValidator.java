@@ -70,6 +70,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthBaseValidator;
 import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
  * Validator that checks for the required fields in an OAuth Token request with the Refresh token grant type.
@@ -88,14 +89,9 @@ public class RefreshTokenValidator extends OAuthBaseValidator<HttpServletRequest
     }
 
     @Override
-	public void paramValuesValidation() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean enforceClientAuthentication() {
-		return true;
+	public void paramDefaultValuesValidation() {
+    	paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.REFRESH_TOKEN.toString());
+    	//refreshcode in ClientCredentials logic validate.
 	}
 
 }

@@ -25,13 +25,14 @@ import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
 public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
 
     protected List<String> requiredParams = new ArrayList<String>();
-    protected HashMap<String, String> paramMustValues = new HashMap<String, String>();
+    protected HashMap<String, String> paramDefaultValues = new HashMap<String, String>();
     
     private ClientCredentials<T> customClientCredentialsValidator = null;
     
     public OAuthBaseValidator() {
     	requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
         requiredParams.add(Consts.AuthConsts.AUTH_STATE);
+        this.paramDefaultValuesValidation();
     }
     
     public void setCustomClientCredentialsValidator(ClientCredentials<T> customClientCredentialsValidator) {
@@ -39,15 +40,9 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
     }
 
     /**
-     * param value validation 
+     * param default value validation 
      */
-    public abstract void paramValuesValidation();
-    
-    /**
-     * enforceClientAuthentication: yes or no
-     * @return
-     */
-    public abstract boolean enforceClientAuthentication();
+    public abstract void paramDefaultValuesValidation();
     
     /**
      * validate method
@@ -97,20 +92,15 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
      * validate paramter values
      * @param request
      * @throws OAuthProblemException
-     * TODO 没有完成准确的测试
      */
     protected void validateRequiredParameterValues(T request) throws OAuthProblemException {
-    	final Set<String> keys = paramMustValues.keySet();
+    	final Set<String> keys = paramDefaultValues.keySet();
     	for (String key : keys) {
 			String param = request.getParameter(key);
-			String mustValue = paramMustValues.get(key);
+			String mustValue = paramDefaultValues.get(key);
 			if (StrKit.isBlank(param) 
 					|| (StrKit.notBlank(param) && !mustValue.equals(param))) {
-				if (key.equals(Consts.AuthConsts.AUTH_RESPONSE_TYPE)) {
-					throw OAuthExceptionHandleKit.handleInvalidResponseTypeValueException(mustValue);
-				} else if (key.equals(Consts.AuthConsts.AUTH_GRANT_TYPE)) {
-					throw OAuthExceptionHandleKit.handleInvalidGrantTypeValueException(mustValue);
-				}
+				throw OAuthExceptionHandleKit.handleInvalidValueException(param, mustValue);
 			}
 		}
     }
@@ -233,10 +223,9 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
         this.validateMethod(request);
         this.validateRequiredParameters(request);
         this.validateRequiredParameterValues(request);
-        this.paramValuesValidation();//TODO 测试不同的 Request 的 Values
+        
         this.getClientParameters(request);
-        if (this.enforceClientAuthentication()) {
-			this.validateClientCredentials(request);
-		}
+        //client credentials
+		this.validateClientCredentials(request);
     }
 }

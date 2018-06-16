@@ -82,29 +82,15 @@ public class OAuthExceptionHandleKit {
 	}
 
 	/**
-	 * handle invalid response type
+	 * handle invalid param default values
+	 * @param key paramKey
 	 * @param validValue
 	 * @return
 	 */
-	public static OAuthProblemException handleInvalidResponseTypeValueException(
+	public static OAuthProblemException handleInvalidValueException(String paramKey,
 			String validValue) {
 		StringBuilder desc = new StringBuilder(
-				"Invalid ResponseType! Valid ResponseType:").append(validValue);
-		return OAuthProblemException
-				.error(RepErrCodes.REQ_ERR_CODE)
-				.description(desc.toString().trim())
-				.responseStatus(HttpServletResponse.SC_FORBIDDEN);
-	}
-
-	/**
-	 * handle invalid grant type
-	 * @param validValue
-	 * @return
-	 */
-	public static OAuthProblemException handleInvalidGrantTypeValueException(
-			String validValue) {
-		StringBuilder desc = new StringBuilder(
-				"Invalid GrantType! Valid GrantType:").append(validValue);
+				"Invalid value for ").append(validValue).append("the valid value is ").append(validValue);
 		return OAuthProblemException
 				.error(RepErrCodes.REQ_ERR_CODE)
 				.description(desc.toString().trim())

@@ -69,53 +69,5 @@ public class Consts {
         public static final String AUTH_ACCESS_TOKEN = "access_token";
         public static final String AUTH_EXPIRES_IN = "expires_in";
         public static final String AUTH_REFRESH_TOKEN = "refresh_token";
-        public static final String AUTH_SEX = "sex";
-        public static final String AUTH_AVATAR_URL = "avatar_url";
-        
-        public static final String AUTH_BIRTHDAY = "birthday";
-        public static final String AUTH_PID = "pid";
-        public static final String AUTH_CID = "cid";
-        public static final String AUTH_ACTION = "action";
-        public static final String AUTH_MOBILE = "mobile";
-        public static final String AUTH_SMSCODE = "smscode";
-        public static final String AUTH_CHANNEL = "channel";
-        public static final String AUTH_VERCODE = "vercode";
     }
-    
-    /**
-     * RepConsts
-     * @author Jobsz
-     *
-     */
-    public static final class RepConsts {
-    	// 用户id
-    	public static final String REP_UID = "uid";
-    	// 用户类型：1=粉丝；2=篮球星；3=足球星；
-    	public static final String REP_UTYPE = "utype";
-    }
-    
-    /**
-     * GrantTypeConsts <br/>
-     * @author Jobsz [zcq@zhucongqi.cn]
-     * @version
-     */
-    public static final class GrantType {
-    	// authorization & code validate
-    	public static final String CODE = "code";
-    	public static final String VERCODE = "vercode";
-    	public static final String ACCESS_TOKEN = "access_token";
-    	public static final String REFRESH_TOKEN = "refresh_token";
-    }
-    
-    /**
-     * ResponseTypeConsts <br/>
-     * @author Jobsz [zcq@zhucongqi.cn]
-     * @version
-     */
-    public static final class ResponseType {
-    	public static final String CODE = "code";
-    	public static final String TOKEN = "token";
-    	public static final String SMSCODE = "smscode";
-    	public static final String VERCODE = "vercode";
-    }
-}
+  }

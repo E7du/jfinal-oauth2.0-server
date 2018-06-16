@@ -106,6 +106,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthBaseValidator;
 import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
  * Resource Owner Password Credentials Grant
@@ -121,14 +122,9 @@ public class PasswordCredentialValidator extends OAuthBaseValidator<HttpServletR
     }
 
 	@Override
-	public void paramValuesValidation() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean enforceClientAuthentication() {
-		return true;
+	public void paramDefaultValuesValidation() {
+		paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.PASSWORD.toString());
+		// username and password in ClientCredentials logic validate.
 	}
 
 }

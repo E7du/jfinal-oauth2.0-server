@@ -95,6 +95,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthBaseValidator;
 import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.message.types.ResponseType;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
@@ -107,13 +108,10 @@ public class AuthorizationRequestValidator extends OAuthBaseValidator<HttpServle
     }
 
 	@Override
-	public void paramValuesValidation() {
-		
+	public void paramDefaultValuesValidation() {
+		paramDefaultValues.put(OAuth.OAUTH_RESPONSE_TYPE, ResponseType.CODE.toString());
+		//clientid in ClientCredentials logic validate.
 	}
 
-	@Override
-	public boolean enforceClientAuthentication() {
-		return false;
-	}
 }
 

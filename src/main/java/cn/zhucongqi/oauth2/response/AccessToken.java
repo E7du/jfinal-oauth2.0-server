@@ -6,7 +6,6 @@ package cn.zhucongqi.oauth2.response;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.consts.Consts;
-import cn.zhucongqi.oauth2.consts.Consts.RepConsts;
 
 
 /**
@@ -51,24 +50,6 @@ public class AccessToken extends Response {
 	 */
 	public AccessToken setRefreshToken(String refreshToken) {
 		this.params.put(Consts.AuthConsts.AUTH_REFRESH_TOKEN, refreshToken);
-		return this;
-	}
-	
-	/**
-	 * Set Uid: user id 
-	 * @param uid
-	 */
-	public AccessToken setUid(String uid) {
-		this.params.put(RepConsts.REP_UID, uid);
-		return this;
-	}
-	
-	/**
-	 * Set Utype: user type
-	 * @param utype
-	 */
-	public AccessToken setUtype(Integer utype) {
-		this.params.put(RepConsts.REP_UTYPE, String.valueOf(utype));
 		return this;
 	}
 }

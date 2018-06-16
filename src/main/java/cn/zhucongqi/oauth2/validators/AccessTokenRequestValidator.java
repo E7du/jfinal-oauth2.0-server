@@ -53,6 +53,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthBaseValidator;
 import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
@@ -67,13 +68,9 @@ public class AccessTokenRequestValidator extends OAuthBaseValidator<HttpServletR
     }
 
 	@Override
-	public void paramValuesValidation() {
-		
-	}
-
-	@Override
-	public boolean enforceClientAuthentication() {
-		return true;
+	public void paramDefaultValuesValidation() {
+		paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.AUTHORIZATION_CODE.toString());
+		//code,clientid,redurect_uri in ClientCredentials logic validate.
 	}
 
 }

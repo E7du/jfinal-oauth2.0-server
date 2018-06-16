@@ -36,6 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthBaseValidator;
 import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
  * Client Credentials Grant
@@ -49,13 +50,8 @@ public class ClientCredentialValidator extends OAuthBaseValidator<HttpServletReq
     }
 
 	@Override
-	public void paramValuesValidation() {
-		// TODO Auto-generated method stub
-		
+	public void paramDefaultValuesValidation() {
+		paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.CLIENT_CREDENTIALS.toString());
 	}
 
-	@Override
-	public boolean enforceClientAuthentication() {
-		return true;
-	}
 }
