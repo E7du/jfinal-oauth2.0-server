@@ -35,7 +35,7 @@ package cn.zhucongqi.oauth2.validators;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
-import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
@@ -51,12 +51,12 @@ public class ClientCredentialValidator extends OAuthValidator {
 
 	@Override
 	public void initParamDefaultValues() {
-		this.paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.CLIENT_CREDENTIALS.toString());
+		this.paramDefaultValues.put(OAuthConsts.OAuth.OAUTH_GRANT_TYPE, GrantType.CLIENT_CREDENTIALS.toString());
 	}
 
 	@Override
 	public void initRequiredParams() {
-		this.requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "client_credentials".
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "client_credentials".
 	}
 
 }

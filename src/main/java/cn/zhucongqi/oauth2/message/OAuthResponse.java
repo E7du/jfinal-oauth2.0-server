@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.kit.StrKit;
 
-import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 import cn.zhucongqi.oauth2.consts.OAuthError;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.parameters.JSONBodyParametersApplier;
@@ -113,7 +113,7 @@ public class OAuthResponse implements OAuthMessage {
         }
 
         public OAuthResponseBuilder setScope(String value) {
-            this.parameters.put(OAuth.OAUTH_SCOPE, value);
+            this.parameters.put(OAuthConsts.OAuth.OAUTH_SCOPE, value);
             return this;
         }
 
@@ -135,7 +135,7 @@ public class OAuthResponse implements OAuthMessage {
         public OAuthErrorResponseBuilder(int responseCode, HttpServletRequest request) {
             super(responseCode);
             
-            String state = request.getParameter(OAuth.OAUTH_STATE);
+            String state = request.getParameter(OAuthConsts.OAuth.OAUTH_STATE);
             if (StrKit.notBlank(state)){
             	this.setState(state);
             }else{
@@ -170,12 +170,12 @@ public class OAuthResponse implements OAuthMessage {
         }
 
         public OAuthErrorResponseBuilder setState(String state) {
-            this.parameters.put(OAuth.OAUTH_STATE, state);
+            this.parameters.put(OAuthConsts.OAuth.OAUTH_STATE, state);
             return this;
         }
 
         public OAuthErrorResponseBuilder setRealm(String realm) {
-            this.parameters.put(OAuth.WWWAuthHeader.REALM, realm);
+            this.parameters.put(OAuthConsts.WWWAuthHeader.REALM, realm);
             return this;
         }
 

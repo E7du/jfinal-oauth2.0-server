@@ -69,11 +69,11 @@ package cn.zhucongqi.oauth2.validators;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
-import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
- * Validator that checks for the required fields in an OAuth Token request with the Refresh token grant type.
+ * Validator that checks for the required fields in an OAuthConsts Token request with the Refresh token grant type.
  * This validator enforces client authentication either through basic authentication or body parameters.
  *
  * http://www.rfcreader.com/#rfc6749
@@ -89,14 +89,14 @@ public class RefreshTokenValidator extends OAuthValidator {
 
     @Override
 	public void initParamDefaultValues() {
-    	this.paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.REFRESH_TOKEN.toString());
+    	this.paramDefaultValues.put(OAuthConsts.OAuth.OAUTH_GRANT_TYPE, GrantType.REFRESH_TOKEN.toString());
     	//refreshcode in OAuthClientCredentials logic validate.
 	}
 
 	@Override
 	public void initRequiredParams() {
-        this.requiredParams.add(OAuth.OAUTH_GRANT_TYPE); //Value MUST be set to "refresh_token".
-        this.requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);//REQUIRED.  The refresh token issued to the client.
+        this.requiredParams.add(OAuthConsts.OAuth.OAUTH_GRANT_TYPE); //Value MUST be set to "refresh_token".
+        this.requiredParams.add(OAuthConsts.OAuth.OAUTH_REFRESH_TOKEN);//REQUIRED.  The refresh token issued to the client.
 	}
 
 }

@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import com.jfinal.kit.StrKit;
 
 import cn.zhucongqi.oauth2.clientcredentials.OAuthClientCredentials;
-import cn.zhucongqi.oauth2.consts.Consts;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 import cn.zhucongqi.oauth2.consts.OAuthError;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
 
 /**
- * OAuth Request Validator
+ * OAuthConsts Request Validator
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  * @param <T>
@@ -35,8 +35,8 @@ public abstract class OAuthValidator {
     public OAuthValidator(HttpServletRequest request) {
     	this.request = request;
     	//default require scope and state
-    	this.requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
-    	this.requiredParams.add(Consts.AuthConsts.AUTH_STATE);
+    	this.requiredParams.add(OAuthConsts.OAuth.OAUTH_SCOPE);
+    	this.requiredParams.add(OAuthConsts.OAuth.OAUTH_STATE);
     	this.initRequiredParams();
         this.initParamDefaultValues();
     }
@@ -66,7 +66,7 @@ public abstract class OAuthValidator {
      */
     private void validateMethod() throws OAuthProblemException {
         String method = this.request.getMethod();
-        if (!method.equals(Consts.HttpMethod.GET) && !method.equals(Consts.HttpMethod.POST)) {
+        if (!method.equals(OAuthConsts.HttpMethod.GET) && !method.equals(OAuthConsts.HttpMethod.POST)) {
             throw OAuthProblemException.error(OAuthError.CodeResponse.INVALID_REQUEST)
                 .description("Method not correct.");
         }
@@ -78,7 +78,7 @@ public abstract class OAuthValidator {
      */
     private void validateContentType() throws OAuthProblemException {
         String contentType = this.request.getContentType();
-        final String expectedContentType = Consts.ContentType.URL_ENCODED;
+        final String expectedContentType = OAuthConsts.ContentType.URL_ENCODED;
         if (!OAuthExceptionHandleKit.hasContentType(contentType, expectedContentType)) {
             throw OAuthExceptionHandleKit.handleBadContentTypeException(expectedContentType);
         }
@@ -126,14 +126,14 @@ public abstract class OAuthValidator {
     	// validate parameters missing
 		Set<String> missingParameters = new HashSet<String>();
 		
-		String client_id = this.request.getParameter(Consts.AuthConsts.AUTH_CLIENT_ID);
+		String client_id = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CLIENT_ID);
 		if (StrKit.isBlank(client_id)) {
-			missingParameters.add(Consts.AuthConsts.AUTH_CLIENT_ID);
+			missingParameters.add(OAuthConsts.OAuth.OAUTH_CLIENT_ID);
 		}
 		
-		String client_secret = this.request.getParameter(Consts.AuthConsts.AUTH_CLIENT_SECRET);
+		String client_secret = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CLIENT_SECRET);
 		if (StrKit.isBlank(client_secret)) {
-			missingParameters.add(Consts.AuthConsts.AUTH_CLIENT_SECRET);
+			missingParameters.add(OAuthConsts.OAuth.OAUTH_CLIENT_SECRET);
 		}
 
 		//check missing or not
@@ -197,27 +197,27 @@ public abstract class OAuthValidator {
      */
     private void initClientParameters() {
     	// client and secret
-    	String clientId = this.request.getParameter(Consts.AuthConsts.AUTH_CLIENT_ID);
+    	String clientId = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CLIENT_ID);
     	if (StrKit.notBlank(clientId)) {
         	this.setClientId(clientId);	
 		}
     	
-    	String clientSecret = this.request.getParameter(Consts.AuthConsts.AUTH_CLIENT_SECRET);
+    	String clientSecret = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CLIENT_SECRET);
     	if (StrKit.notBlank(clientSecret)) {
         	this.setClientSecret(clientSecret);	
 		}
     	
-    	String code = this.request.getParameter(Consts.AuthConsts.AUTH_CODE);
+    	String code = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CODE);
     	if (StrKit.notBlank(code)) {
         	this.setCode(code);	
 		}
     	
-    	String state = this.request.getParameter(Consts.AuthConsts.AUTH_STATE);
+    	String state = this.request.getParameter(OAuthConsts.OAuth.OAUTH_STATE);
 		if (StrKit.notBlank(state)) {
 			this.setState(state);
 		}
 		
-		String scope = this.request.getParameter(Consts.AuthConsts.AUTH_SCOPE);
+		String scope = this.request.getParameter(OAuthConsts.OAuth.OAUTH_SCOPE);
 		if (StrKit.notBlank(scope)) {
 			this.setScope(scope);
 		}

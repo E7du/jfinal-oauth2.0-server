@@ -52,7 +52,7 @@ package cn.zhucongqi.oauth2.validators;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
-import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
@@ -66,16 +66,16 @@ public class AccessTokenRequestValidator extends OAuthValidator {
 
 	@Override
 	public void initParamDefaultValues() {
-		this.paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.AUTHORIZATION_CODE.toString());
+		this.paramDefaultValues.put(OAuthConsts.OAuth.OAUTH_GRANT_TYPE, GrantType.AUTHORIZATION_CODE.toString());
 		//code,clientid,redurect_uri in OAuthClientCredentials logic validate.
 	}
 
 	@Override
 	public void initRequiredParams() {
-		this.requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "authorization_code".
-		this.requiredParams.add(OAuth.OAUTH_CODE);//REQUIRED. The authorization code received from the authorization server.
-		this.requiredParams.add(OAuth.OAUTH_REDIRECT_URI);//REQUIRED, if the "redirect_uri" parameter was included in the authorization request as described in Section 4.1.1, and their values MUST be identical.
-		this.requiredParams.add(OAuth.OAUTH_CLIENT_ID);//REQUIRED, if the client is not authenticating with the authorization server as described in Section 3.2.1.
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "authorization_code".
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_CODE);//REQUIRED. The authorization code received from the authorization server.
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_REDIRECT_URI);//REQUIRED, if the "redirect_uri" parameter was included in the authorization request as described in Section 4.1.1, and their values MUST be identical.
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_CLIENT_ID);//REQUIRED, if the client is not authenticating with the authorization server as described in Section 3.2.1.
 	}
 
 }

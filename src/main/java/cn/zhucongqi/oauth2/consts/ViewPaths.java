@@ -9,8 +9,5 @@ package cn.zhucongqi.oauth2.consts;
  * @version
  */
 public class ViewPaths {
-
-	// auth 的 dir
-	public static final String AUTH_VIEW_PATH = "auth";
 	
 }

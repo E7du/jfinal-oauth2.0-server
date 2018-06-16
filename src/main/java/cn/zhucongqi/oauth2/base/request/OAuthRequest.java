@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.clientcredentials.OAuthClientCredentials;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
+import cn.zhucongqi.oauth2.message.types.RequestType;
 import cn.zhucongqi.oauth2.validators.AccessTokenRequestValidator;
 
 /**
@@ -25,8 +26,22 @@ public class OAuthRequest {
 		this.validator.setClientCredentials(clientCredentials);
 	}
 
+	/**
+	 * init oauth request
+	 * @param request
+	 */
 	public OAuthRequest(HttpServletRequest request) {
 		this.validator = new AccessTokenRequestValidator(request);
+	}
+	
+	/**
+	 * init oauth request
+	 * @param request
+	 * @param type: current request type
+	 */
+	public OAuthRequest(HttpServletRequest request, RequestType type) {
+		this.validator = new AccessTokenRequestValidator(request);
+		
 	}
 	
 	/**

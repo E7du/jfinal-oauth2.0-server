@@ -27,12 +27,12 @@ import org.apache.commons.codec.binary.Base64;
 
 import com.jfinal.kit.StrKit;
 
-import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 import cn.zhucongqi.oauth2.consts.OAuthError;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
 /**
- * Common OAuth Utils class.
+ * Common OAuthConsts Utils class.
  * 
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
@@ -43,7 +43,7 @@ public final class OAuthKit {
     private static final String PARAMETER_SEPARATOR = "&";
     private static final String NAME_VALUE_SEPARATOR = "=";
 
-    public static final String AUTH_SCHEME = OAuth.OAUTH_HEADER_NAME;
+    public static final String AUTH_SCHEME = OAuthConsts.OAuth.OAUTH_HEADER_NAME;
 
     private static final Pattern OAUTH_HEADER = Pattern.compile("\\s*(\\w*)\\s+(.*)");
     private static final Pattern NVP = Pattern.compile("(\\S*)\\s*\\=\\s*\"([^\"]*)\"");
@@ -214,7 +214,7 @@ public final class OAuthKit {
         if (semi >= 0) {
             contentType = contentType.substring(0, semi);
         }
-        return OAuth.ContentType.URL_ENCODED.equalsIgnoreCase(contentType.trim());
+        return OAuthConsts.ContentType.URL_ENCODED.equalsIgnoreCase(contentType.trim());
     }
 
     public static String decodePercent(String s) {
@@ -307,7 +307,7 @@ public final class OAuthKit {
      */
     public static String encodeOAuthHeader(Map<String, Object> entries) {
         StringBuffer sb = new StringBuffer();
-        sb.append(OAuth.OAUTH_HEADER_NAME).append(" ");
+        sb.append(OAuthConsts.OAuth.OAUTH_HEADER_NAME).append(" ");
         for (Map.Entry<String, Object> entry : entries.entrySet()) {
             String value = entry.getValue() == null? null: String.valueOf(entry.getValue());
             if (StrKit.notBlank(entry.getKey()) && StrKit.notBlank(value)) {
@@ -326,7 +326,7 @@ public final class OAuthKit {
      */
     public static String encodeAuthorizationBearerHeader(Map<String, Object> entries) {
         StringBuffer sb = new StringBuffer();
-        sb.append(OAuth.OAUTH_HEADER_NAME).append(" ");
+        sb.append(OAuthConsts.OAuth.OAUTH_HEADER_NAME).append(" ");
         for (Map.Entry<String, Object> entry : entries.entrySet()) {
             String value = entry.getValue() == null? null: String.valueOf(entry.getValue());
             if (StrKit.notBlank(entry.getKey()) && StrKit.notBlank(value)) {

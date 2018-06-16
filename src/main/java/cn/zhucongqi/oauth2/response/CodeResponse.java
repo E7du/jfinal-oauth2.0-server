@@ -5,7 +5,7 @@ package cn.zhucongqi.oauth2.response;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.zhucongqi.oauth2.consts.Consts;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
@@ -22,7 +22,7 @@ public class CodeResponse extends Response {
 	 * @param code
 	 */
 	public CodeResponse setCode(String code) {
-		this.params.put(Consts.AuthConsts.AUTH_CODE, code);
+		this.params.put(OAuthConsts.OAuth.OAUTH_CODE, code);
 		return this;
 	}
 }

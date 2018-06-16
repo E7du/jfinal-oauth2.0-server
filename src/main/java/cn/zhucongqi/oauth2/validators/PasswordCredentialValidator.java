@@ -13,7 +13,7 @@
    resource owner's credentials (username and password, typically using
    an interactive form).  It is also used to migrate existing clients
    using direct authentication schemes such as HTTP Basic or Digest
-   authentication to OAuth by converting the stored credentials to an
+   authentication to OAuthConsts by converting the stored credentials to an
    access token.
 
      +----------+
@@ -105,7 +105,7 @@ package cn.zhucongqi.oauth2.validators;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
-import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
@@ -121,15 +121,15 @@ public class PasswordCredentialValidator extends OAuthValidator {
 
 	@Override
 	public void initParamDefaultValues() {
-		this.paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.PASSWORD.toString());
+		this.paramDefaultValues.put(OAuthConsts.OAuth.OAUTH_GRANT_TYPE, GrantType.PASSWORD.toString());
 		// username and password in OAuthClientCredentials logic validate.
 	}
 
 	@Override
 	public void initRequiredParams() {
-		this.requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "password".
-		this.requiredParams.add(OAuth.OAUTH_USERNAME);// REQUIRED.  The resource owner username.
-		this.requiredParams.add(OAuth.OAUTH_PASSWORD);//REQUIRED.  The resource owner password.
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "password".
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_USERNAME);// REQUIRED.  The resource owner username.
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_PASSWORD);//REQUIRED.  The resource owner password.
 	}
 
 }

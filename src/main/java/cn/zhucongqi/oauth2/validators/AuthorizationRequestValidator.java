@@ -94,7 +94,7 @@ package cn.zhucongqi.oauth2.validators;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
-import cn.zhucongqi.oauth2.consts.OAuth;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 import cn.zhucongqi.oauth2.message.types.ResponseType;
 
 /**
@@ -108,14 +108,14 @@ public class AuthorizationRequestValidator extends OAuthValidator {
 
 	@Override
 	public void initParamDefaultValues() {
-		this.paramDefaultValues.put(OAuth.OAUTH_RESPONSE_TYPE, ResponseType.CODE.toString());
+		this.paramDefaultValues.put(OAuthConsts.OAuth.OAUTH_RESPONSE_TYPE, ResponseType.CODE.toString());
 		//clientid in OAuthClientCredentials logic validate.
 	}
 
 	@Override
 	public void initRequiredParams() {
-		this.requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);//REQUIRED.  Value MUST be set to "code".
-		this.requiredParams.add(OAuth.OAUTH_CLIENT_ID);//REQUIRED.  The client identifier as described in Section 2.2.
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_RESPONSE_TYPE);//REQUIRED.  Value MUST be set to "code".
+		this.requiredParams.add(OAuthConsts.OAuth.OAUTH_CLIENT_ID);//REQUIRED.  The client identifier as described in Section 2.2.
 	}
 
 }

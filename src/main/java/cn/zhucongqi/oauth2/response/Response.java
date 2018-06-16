@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jfinal.kit.StrKit;
 
-import cn.zhucongqi.oauth2.consts.Consts;
+import cn.zhucongqi.oauth2.consts.OAuthConsts;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
@@ -24,12 +24,12 @@ public abstract class Response {
 	public Response(HttpServletRequest request) {
 		this.params = new HashMap<String, String>();
 		
-		String state = request.getParameter(Consts.AuthConsts.AUTH_STATE);
+		String state = request.getParameter(OAuthConsts.OAuth.OAUTH_STATE);
 		if (StrKit.notBlank(state)) {
 			this.setState(state);
 		}
 		
-		String scope = request.getParameter(Consts.AuthConsts.AUTH_SCOPE);
+		String scope = request.getParameter(OAuthConsts.OAuth.OAUTH_SCOPE);
 		if (StrKit.notBlank(scope)) {
 			this.setScope(scope);
 		}
@@ -37,7 +37,7 @@ public abstract class Response {
 	
 	private void setState(String state) {
 		this.state = state;
-		this.params.put(Consts.AuthConsts.AUTH_STATE, this.state);
+		this.params.put(OAuthConsts.OAuth.OAUTH_STATE, this.state);
 	}
 	
 	public String getState() {
@@ -46,7 +46,7 @@ public abstract class Response {
 	
 	private void setScope(String scope) {
 		this.scope = scope;
-		this.params.put(Consts.AuthConsts.AUTH_SCOPE, this.scope);
+		this.params.put(OAuthConsts.OAuth.OAUTH_SCOPE, this.scope);
 	}
 	
 	public String getScope() {
