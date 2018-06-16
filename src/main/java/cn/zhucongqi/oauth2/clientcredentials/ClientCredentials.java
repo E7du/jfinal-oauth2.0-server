@@ -11,12 +11,12 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public interface ClientCredentials<T extends HttpServletRequest> {
+public interface ClientCredentials {
 	
 	/**
 	 * validateClientCredentials
 	 * @param request
 	 * @throws AuthProblemException
 	 */
-	public void validateClientCredentials(T request) throws OAuthProblemException;
+	public void validateClientCredentials(HttpServletRequest request) throws OAuthProblemException;
 }

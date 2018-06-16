@@ -58,9 +58,10 @@ import cn.zhucongqi.oauth2.message.types.GrantType;
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
  */
-public class AccessTokenRequestValidator extends OAuthValidator<HttpServletRequest> {
+public class AccessTokenRequestValidator extends OAuthValidator {
 
-    public AccessTokenRequestValidator() {
+    public AccessTokenRequestValidator(HttpServletRequest request) {
+    	super(request);
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "authorization_code".
         requiredParams.add(OAuth.OAUTH_CODE);//REQUIRED. The authorization code received from the authorization server.
         requiredParams.add(OAuth.OAUTH_REDIRECT_URI);//REQUIRED, if the "redirect_uri" parameter was included in the authorization request as described in Section 4.1.1, and their values MUST be identical.

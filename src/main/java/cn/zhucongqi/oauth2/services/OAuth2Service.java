@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jfinal.ext.core.Service;
 
+import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.Consts;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.issuer.MD5Generator;
 import cn.zhucongqi.oauth2.issuer.OAuthIssuerKit;
 import cn.zhucongqi.oauth2.issuer.ValueGenerator;
 import cn.zhucongqi.oauth2.message.types.RequestType;
+import cn.zhucongqi.oauth2.request.AccessTokenRequest;
 import cn.zhucongqi.oauth2.response.AccessToken;
 import cn.zhucongqi.oauth2.response.ErrorResponse;
 import cn.zhucongqi.oauth2.response.ResponseKit;
@@ -66,6 +68,7 @@ public class OAuth2Service extends Service implements OAuth2ServiceApi {
 
 	@Override
 	public void authrize() {
+		HttpServletRequest request = this.controller.getRequest();
 		
 	}
 	
@@ -76,7 +79,9 @@ public class OAuth2Service extends Service implements OAuth2ServiceApi {
 
 	@Override
 	public void accessToken() {
-		
+		HttpServletRequest request = this.controller.getRequest();
+		AccessTokenRequest acreq = new AccessTokenRequest(request);
+		OAuthValidator val = acreq.getValidator();
 	}
 	
 	@Override

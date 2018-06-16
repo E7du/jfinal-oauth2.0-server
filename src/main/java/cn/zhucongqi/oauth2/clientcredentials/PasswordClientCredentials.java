@@ -15,7 +15,7 @@ import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
  * @param <T>
  *
  */
-public class PasswordClientCredentials implements ClientCredentials<HttpServletRequest> {
+public class PasswordClientCredentials implements ClientCredentials {
 
 	@Override
 	public void validateClientCredentials(HttpServletRequest request) throws OAuthProblemException {

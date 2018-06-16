@@ -113,9 +113,10 @@ import cn.zhucongqi.oauth2.message.types.GrantType;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class PasswordCredentialValidator extends OAuthValidator<HttpServletRequest> {
+public class PasswordCredentialValidator extends OAuthValidator {
 
-    public PasswordCredentialValidator() {
+    public PasswordCredentialValidator(HttpServletRequest request) {
+    	super(request);
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "password".
         requiredParams.add(OAuth.OAUTH_USERNAME);// REQUIRED.  The resource owner username.
         requiredParams.add(OAuth.OAUTH_PASSWORD);//REQUIRED.  The resource owner password.

@@ -22,20 +22,22 @@ import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
  * @version
  * @param <T>
  */
-public abstract class OAuthValidator<T extends HttpServletRequest> {
+public abstract class OAuthValidator {
 
+	private HttpServletRequest request = null;
     protected List<String> requiredParams = new ArrayList<String>();
     protected HashMap<String, String> paramDefaultValues = new HashMap<String, String>();
     
-    private ClientCredentials<T> customClientCredentialsValidator = null;
+    private ClientCredentials customClientCredentialsValidator = null;
     
-    public OAuthValidator() {
-    	requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
-        requiredParams.add(Consts.AuthConsts.AUTH_STATE);
+    public OAuthValidator(HttpServletRequest request) {
+    	this.request = request;
+    	this.requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
+    	this.requiredParams.add(Consts.AuthConsts.AUTH_STATE);
         this.paramDefaultValuesValidation();
     }
     
-    public void setCustomClientCredentialsValidator(ClientCredentials<T> customClientCredentialsValidator) {
+    public void setCustomClientCredentialsValidator(ClientCredentials customClientCredentialsValidator) {
     	this.customClientCredentialsValidator = customClientCredentialsValidator;
     }
 
@@ -46,11 +48,10 @@ public abstract class OAuthValidator<T extends HttpServletRequest> {
     
     /**
      * validate method
-     * @param request
      * @throws OAuthProblemException
      */
-    protected void validateMethod(HttpServletRequest request) throws OAuthProblemException {
-        String method = request.getMethod();
+    protected void validateMethod() throws OAuthProblemException {
+        String method = this.request.getMethod();
         if (!method.equals(Consts.HttpMethod.GET) && !method.equals(Consts.HttpMethod.POST)) {
             throw OAuthProblemException.error(OAuthError.CodeResponse.INVALID_REQUEST)
                 .description("Method not correct.");
@@ -59,11 +60,10 @@ public abstract class OAuthValidator<T extends HttpServletRequest> {
 
     /**
      * validate content type
-     * @param request
      * @throws OAuthProblemException
      */
-    protected void validateContentType(T request) throws OAuthProblemException {
-        String contentType = request.getContentType();
+    protected void validateContentType() throws OAuthProblemException {
+        String contentType = this.request.getContentType();
         final String expectedContentType = Consts.ContentType.URL_ENCODED;
         if (!OAuthExceptionHandleKit.hasContentType(contentType, expectedContentType)) {
             throw OAuthExceptionHandleKit.handleBadContentTypeException(expectedContentType);
@@ -72,13 +72,12 @@ public abstract class OAuthValidator<T extends HttpServletRequest> {
 
     /**
      * validate parameter
-     * @param request
      * @throws OAuthProblemException
      */
-    protected void validateRequiredParameters(T request) throws OAuthProblemException {
+    protected void validateRequiredParameters() throws OAuthProblemException {
         final Set<String> missingParameters = new HashSet<String>();
         for (String requiredParam : requiredParams) {
-            String val = request.getParameter(requiredParam);
+            String val = this.request.getParameter(requiredParam);
             if (StrKit.isBlank(val)) {
                 missingParameters.add(requiredParam);
             }
@@ -90,13 +89,12 @@ public abstract class OAuthValidator<T extends HttpServletRequest> {
     
     /**
      * validate paramter values
-     * @param request
      * @throws OAuthProblemException
      */
-    protected void validateRequiredParameterValues(T request) throws OAuthProblemException {
+    protected void validateRequiredParameterValues() throws OAuthProblemException {
     	final Set<String> keys = paramDefaultValues.keySet();
     	for (String key : keys) {
-			String param = request.getParameter(key);
+			String param = this.request.getParameter(key);
 			String mustValue = paramDefaultValues.get(key);
 			if (StrKit.isBlank(param) 
 					|| (StrKit.notBlank(param) && !mustValue.equals(param))) {
@@ -107,20 +105,19 @@ public abstract class OAuthValidator<T extends HttpServletRequest> {
     
     /**
      * validateClientCredentials
-     * @param request
      * @throws OAuthProblemException
      */
-    private void validateClientCredentials(T request)
+    private void validateClientCredentials()
 			throws OAuthProblemException {
     	// validate parameters missing
 		Set<String> missingParameters = new HashSet<String>();
 		
-		String client_id = request.getParameter(Consts.AuthConsts.AUTH_CLIENT_ID);
+		String client_id = this.request.getParameter(Consts.AuthConsts.AUTH_CLIENT_ID);
 		if (StrKit.isBlank(client_id)) {
 			missingParameters.add(Consts.AuthConsts.AUTH_CLIENT_ID);
 		}
 		
-		String client_secret = request.getParameter(Consts.AuthConsts.AUTH_CLIENT_SECRET);
+		String client_secret = this.request.getParameter(Consts.AuthConsts.AUTH_CLIENT_SECRET);
 		if (StrKit.isBlank(client_secret)) {
 			missingParameters.add(Consts.AuthConsts.AUTH_CLIENT_SECRET);
 		}
@@ -131,7 +128,7 @@ public abstract class OAuthValidator<T extends HttpServletRequest> {
 		}
 		
 		//validate parameters validation
-		this.customClientCredentialsValidator.validateClientCredentials(request);
+		this.customClientCredentialsValidator.validateClientCredentials(this.request);
 	}
     
     private String scope = "";
@@ -184,29 +181,29 @@ public abstract class OAuthValidator<T extends HttpServletRequest> {
      * get client parameters
      * @param request
      */
-    protected void getClientParameters(T request) {
+    protected void getClientParameters() {
     	// client and secret
-    	String clientId = request.getParameter(Consts.AuthConsts.AUTH_CLIENT_ID);
+    	String clientId = this.request.getParameter(Consts.AuthConsts.AUTH_CLIENT_ID);
     	if (StrKit.notBlank(clientId)) {
         	this.setClientId(clientId);	
 		}
     	
-    	String clientSecret = request.getParameter(Consts.AuthConsts.AUTH_CLIENT_SECRET);
+    	String clientSecret = this.request.getParameter(Consts.AuthConsts.AUTH_CLIENT_SECRET);
     	if (StrKit.notBlank(clientSecret)) {
         	this.setClientSecret(clientSecret);	
 		}
     	
-    	String code = request.getParameter(Consts.AuthConsts.AUTH_CODE);
+    	String code = this.request.getParameter(Consts.AuthConsts.AUTH_CODE);
     	if (StrKit.notBlank(code)) {
         	this.setCode(code);	
 		}
     	
-    	String state = request.getParameter(Consts.AuthConsts.AUTH_STATE);
+    	String state = this.request.getParameter(Consts.AuthConsts.AUTH_STATE);
 		if (StrKit.notBlank(state)) {
 			this.setState(state);
 		}
 		
-		String scope = request.getParameter(Consts.AuthConsts.AUTH_SCOPE);
+		String scope = this.request.getParameter(Consts.AuthConsts.AUTH_SCOPE);
 		if (StrKit.notBlank(scope)) {
 			this.setScope(scope);
 		}
@@ -215,17 +212,16 @@ public abstract class OAuthValidator<T extends HttpServletRequest> {
     /**
      * validate request
      * 
-     * @param request
      * @throws OAuthProblemException
      */
-    public void validate(T request) throws OAuthProblemException {
-        this.validateContentType(request);
-        this.validateMethod(request);
-        this.validateRequiredParameters(request);
-        this.validateRequiredParameterValues(request);
+    public void validate() throws OAuthProblemException {
+        this.validateContentType();
+        this.validateMethod();
+        this.validateRequiredParameters();
+        this.validateRequiredParameterValues();
         
-        this.getClientParameters(request);
+        this.getClientParameters();
         //client credentials
-		this.validateClientCredentials(request);
+		this.validateClientCredentials();
     }
 }

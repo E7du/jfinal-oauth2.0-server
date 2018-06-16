@@ -11,10 +11,13 @@ import cn.zhucongqi.oauth2.validators.AccessTokenRequestValidator;
  */
 public class AccessTokenRequest {
 
-	private OAuthValidator<HttpServletRequest> validator = null;
+	private OAuthValidator validator = null;
 
 	public AccessTokenRequest(HttpServletRequest request) {
-		this.validator = new AccessTokenRequestValidator();
-		this.validator.validate(request);
+		this.validator = new AccessTokenRequestValidator(request);
+	}
+	
+	public OAuthValidator getValidator() {
+		return this.validator;
 	}
 }

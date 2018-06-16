@@ -43,9 +43,10 @@ import cn.zhucongqi.oauth2.message.types.GrantType;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class ClientCredentialValidator extends OAuthValidator<HttpServletRequest> {
+public class ClientCredentialValidator extends OAuthValidator {
    
-	public ClientCredentialValidator() {
+	public ClientCredentialValidator(HttpServletRequest request) {
+		super(request);
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "client_credentials".
     }
 

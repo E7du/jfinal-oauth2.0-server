@@ -100,9 +100,10 @@ import cn.zhucongqi.oauth2.message.types.ResponseType;
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
  */
-public class AuthorizationRequestValidator extends OAuthValidator<HttpServletRequest> {
+public class AuthorizationRequestValidator extends OAuthValidator {
 
-    public AuthorizationRequestValidator() {
+    public AuthorizationRequestValidator(HttpServletRequest request) {
+    	super(request);
         requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);//REQUIRED.  Value MUST be set to "code".
         requiredParams.add(OAuth.OAUTH_CLIENT_ID);//REQUIRED.  The client identifier as described in Section 2.2.
     }

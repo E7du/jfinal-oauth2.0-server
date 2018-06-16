@@ -165,9 +165,10 @@ import cn.zhucongqi.oauth2.message.types.ResponseType;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class ImplicitValidator extends OAuthValidator<HttpServletRequest> {
+public class ImplicitValidator extends OAuthValidator {
 
-    public ImplicitValidator() {
+    public ImplicitValidator(HttpServletRequest request) {
+    	super(request);
         requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);//REQUIRED.  Value MUST be set to "token".
         requiredParams.add(OAuth.OAUTH_CLIENT_ID);//REQUIRED.  The client identifier as described in Section 2.2.
     }

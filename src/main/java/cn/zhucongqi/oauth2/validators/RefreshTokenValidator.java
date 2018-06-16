@@ -81,9 +81,10 @@ import cn.zhucongqi.oauth2.message.types.GrantType;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class RefreshTokenValidator extends OAuthValidator<HttpServletRequest> {
+public class RefreshTokenValidator extends OAuthValidator {
 
-    public RefreshTokenValidator() {
+    public RefreshTokenValidator(HttpServletRequest request) {
+    	super(request);
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE); //Value MUST be set to "refresh_token".
         requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);//REQUIRED.  The refresh token issued to the client.
     }
