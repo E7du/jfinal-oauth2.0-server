@@ -7,7 +7,7 @@ import com.jfinal.core.ActionKey;
 import com.jfinal.ext.core.ControllerExt;
 
 import cn.zhucongqi.oauth2.consts.ActionUrls;
-import cn.zhucongqi.oauth2.services.OAuth2Service;
+import cn.zhucongqi.oauth2.services.OAuthService;
 
 /**
  * 
@@ -16,7 +16,8 @@ import cn.zhucongqi.oauth2.services.OAuth2Service;
  */
 public class OAuth2Controller extends ControllerExt {
 	
-	private OAuth2Service _auth2Service;
+	//using ControllerExt auto init the service instance
+	private OAuthService oauthService;
 
 	/**
 	 * generate code 
@@ -26,7 +27,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.AUTHORIZE_URL)
 	public void onAuthorize() {
-		this._auth2Service.authrize();
+		this.oauthService.authrize();
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.AUTHORIZE_CODE_URL)
 	public void onAuthorizeCode() {
-		this._auth2Service.authrizeCode();
+		this.oauthService.authrizeCode();
 	}
 	
 	/**
@@ -49,7 +50,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.SECURE_ACCESS_TOKEN_URL)
 	public void onAccessTokenSecure() {
-		this._auth2Service.secureAccessToken();
+		this.oauthService.secureAccessToken();
 	}
 	
 
@@ -61,7 +62,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.ACCESS_TOKEN_URL)
 	public void onAcessToken() {
-		this._auth2Service.accessToken();
+		this.oauthService.accessToken();
 	}
 	
 	/**
@@ -72,7 +73,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.REFRESH_TOKEN_URL)
 	public void onRefreshToken() {	
-		this._auth2Service.refreshToken();
+		this.oauthService.refreshToken();
 	}
 
 	@Override

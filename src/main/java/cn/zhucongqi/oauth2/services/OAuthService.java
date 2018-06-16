@@ -7,14 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jfinal.ext.core.Service;
 
+import cn.zhucongqi.oauth2.base.services.OAuthApi;
+import cn.zhucongqi.oauth2.consts.OAuthRequestConsts;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
-import cn.zhucongqi.oauth2.request.AccessTokenRequest;
+import cn.zhucongqi.oauth2.request.OAuthRequest;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class OAuth2Service extends Service implements OAuth2ServiceApi {
+public class OAuthService extends Service implements OAuthApi {
 
 //	private RequestType reqType = RequestType.GRANT_REQUEST;
 //	private ValueGenerator valGenerator = new MD5Generator();
@@ -41,12 +43,12 @@ public class OAuth2Service extends Service implements OAuth2ServiceApi {
 //		this.controller.renderJson(accessTokenRep.param());
 //	}
 	
-//	public OAuth2Service setReqType(RequestType reqType) {
+//	public OAuthApi setReqType(RequestType reqType) {
 //		this.reqType = reqType;
 //		return this;
 //	}
 //	
-//	public OAuth2Service setValGenerator(ValueGenerator valGenerator) {
+//	public OAuthApi setValGenerator(ValueGenerator valGenerator) {
 //		this.valGenerator = valGenerator;
 //		return this;
 //	}
@@ -65,8 +67,7 @@ public class OAuth2Service extends Service implements OAuth2ServiceApi {
 	@Override
 	public void accessToken() {
 		HttpServletRequest req = this.controller.getRequest();
-		AccessTokenRequest request = new AccessTokenRequest(req);
-
+		OAuthRequest request = new OAuthRequest(req, OAuthRequestConsts.ACCESS_TOKEN_REQUEST);
 		try {
 			request.validate();
 		} catch (OAuthProblemException e) {

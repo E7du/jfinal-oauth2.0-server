@@ -1,4 +1,4 @@
-package cn.zhucongqi.oauth2.clientcredentials;
+package cn.zhucongqi.oauth2.base.clientcredentials;
 
 import javax.servlet.http.HttpServletRequest;
 

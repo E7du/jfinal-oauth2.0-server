@@ -1,13 +1,13 @@
 /**
  * 
  */
-package cn.zhucongqi.oauth2.services;
+package cn.zhucongqi.oauth2.base.services;
 
 /**
  * @author Jobsz
  *
  */
-public interface OAuth2ServiceApi {
+public interface OAuthApi {
 
 	/**
 	 * Authorization  Code Request <br/>
