@@ -62,16 +62,20 @@ public class AccessTokenRequestValidator extends OAuthValidator {
 
     public AccessTokenRequestValidator(HttpServletRequest request) {
     	super(request);
-        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "authorization_code".
-        requiredParams.add(OAuth.OAUTH_CODE);//REQUIRED. The authorization code received from the authorization server.
-        requiredParams.add(OAuth.OAUTH_REDIRECT_URI);//REQUIRED, if the "redirect_uri" parameter was included in the authorization request as described in Section 4.1.1, and their values MUST be identical.
-        requiredParams.add(OAuth.OAUTH_CLIENT_ID);//REQUIRED, if the client is not authenticating with the authorization server as described in Section 3.2.1.
     }
 
 	@Override
-	public void paramDefaultValuesValidation() {
-		paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.AUTHORIZATION_CODE.toString());
-		//code,clientid,redurect_uri in ClientCredentials logic validate.
+	public void initParamDefaultValues() {
+		this.paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.AUTHORIZATION_CODE.toString());
+		//code,clientid,redurect_uri in OAuthClientCredentials logic validate.
+	}
+
+	@Override
+	public void initRequiredParams() {
+		this.requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "authorization_code".
+		this.requiredParams.add(OAuth.OAUTH_CODE);//REQUIRED. The authorization code received from the authorization server.
+		this.requiredParams.add(OAuth.OAUTH_REDIRECT_URI);//REQUIRED, if the "redirect_uri" parameter was included in the authorization request as described in Section 4.1.1, and their values MUST be identical.
+		this.requiredParams.add(OAuth.OAUTH_CLIENT_ID);//REQUIRED, if the client is not authenticating with the authorization server as described in Section 3.2.1.
 	}
 
 }

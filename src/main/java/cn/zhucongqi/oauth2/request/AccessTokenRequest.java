@@ -2,22 +2,17 @@ package cn.zhucongqi.oauth2.request;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
-import cn.zhucongqi.oauth2.validators.AccessTokenRequestValidator;
+import cn.zhucongqi.oauth2.base.request.OAuthRequest;
+import cn.zhucongqi.oauth2.clientcredentials.AccessTokenClientCredentials;
 
 /**
  * AccessTokenRequest
  * @author Jobsz
  */
-public class AccessTokenRequest {
-
-	private OAuthValidator validator = null;
+public class AccessTokenRequest extends OAuthRequest{
 
 	public AccessTokenRequest(HttpServletRequest request) {
-		this.validator = new AccessTokenRequestValidator(request);
-	}
-	
-	public OAuthValidator getValidator() {
-		return this.validator;
+		super(request);
+		this.setClientClientCredentials(new AccessTokenClientCredentials());
 	}
 }

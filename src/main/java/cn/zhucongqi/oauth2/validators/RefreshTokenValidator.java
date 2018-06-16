@@ -85,14 +85,18 @@ public class RefreshTokenValidator extends OAuthValidator {
 
     public RefreshTokenValidator(HttpServletRequest request) {
     	super(request);
-        requiredParams.add(OAuth.OAUTH_GRANT_TYPE); //Value MUST be set to "refresh_token".
-        requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);//REQUIRED.  The refresh token issued to the client.
     }
 
     @Override
-	public void paramDefaultValuesValidation() {
-    	paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.REFRESH_TOKEN.toString());
-    	//refreshcode in ClientCredentials logic validate.
+	public void initParamDefaultValues() {
+    	this.paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.REFRESH_TOKEN.toString());
+    	//refreshcode in OAuthClientCredentials logic validate.
+	}
+
+	@Override
+	public void initRequiredParams() {
+        this.requiredParams.add(OAuth.OAUTH_GRANT_TYPE); //Value MUST be set to "refresh_token".
+        this.requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);//REQUIRED.  The refresh token issued to the client.
 	}
 
 }

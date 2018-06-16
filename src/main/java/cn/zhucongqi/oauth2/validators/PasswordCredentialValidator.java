@@ -117,15 +117,19 @@ public class PasswordCredentialValidator extends OAuthValidator {
 
     public PasswordCredentialValidator(HttpServletRequest request) {
     	super(request);
-        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "password".
-        requiredParams.add(OAuth.OAUTH_USERNAME);// REQUIRED.  The resource owner username.
-        requiredParams.add(OAuth.OAUTH_PASSWORD);//REQUIRED.  The resource owner password.
     }
 
 	@Override
-	public void paramDefaultValuesValidation() {
-		paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.PASSWORD.toString());
-		// username and password in ClientCredentials logic validate.
+	public void initParamDefaultValues() {
+		this.paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.PASSWORD.toString());
+		// username and password in OAuthClientCredentials logic validate.
+	}
+
+	@Override
+	public void initRequiredParams() {
+		this.requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "password".
+		this.requiredParams.add(OAuth.OAUTH_USERNAME);// REQUIRED.  The resource owner username.
+		this.requiredParams.add(OAuth.OAUTH_PASSWORD);//REQUIRED.  The resource owner password.
 	}
 
 }

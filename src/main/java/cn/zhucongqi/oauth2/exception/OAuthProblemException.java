@@ -25,7 +25,7 @@ public class OAuthProblemException extends IllegalArgumentException {
     private Map<String, String> parameters = new HashMap<String, String>();
 
     protected OAuthProblemException(String error) {
-        this(error, "");
+        this(error, "OAuthProblemException ERROR");
     }
 
     protected OAuthProblemException(String error, String description) {

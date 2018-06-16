@@ -104,14 +104,18 @@ public class AuthorizationRequestValidator extends OAuthValidator {
 
     public AuthorizationRequestValidator(HttpServletRequest request) {
     	super(request);
-        requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);//REQUIRED.  Value MUST be set to "code".
-        requiredParams.add(OAuth.OAUTH_CLIENT_ID);//REQUIRED.  The client identifier as described in Section 2.2.
     }
 
 	@Override
-	public void paramDefaultValuesValidation() {
-		paramDefaultValues.put(OAuth.OAUTH_RESPONSE_TYPE, ResponseType.CODE.toString());
-		//clientid in ClientCredentials logic validate.
+	public void initParamDefaultValues() {
+		this.paramDefaultValues.put(OAuth.OAUTH_RESPONSE_TYPE, ResponseType.CODE.toString());
+		//clientid in OAuthClientCredentials logic validate.
+	}
+
+	@Override
+	public void initRequiredParams() {
+		this.requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);//REQUIRED.  Value MUST be set to "code".
+		this.requiredParams.add(OAuth.OAUTH_CLIENT_ID);//REQUIRED.  The client identifier as described in Section 2.2.
 	}
 
 }

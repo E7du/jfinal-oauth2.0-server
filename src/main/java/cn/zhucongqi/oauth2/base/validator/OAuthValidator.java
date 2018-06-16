@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jfinal.kit.StrKit;
 
-import cn.zhucongqi.oauth2.clientcredentials.ClientCredentials;
+import cn.zhucongqi.oauth2.clientcredentials.OAuthClientCredentials;
 import cn.zhucongqi.oauth2.consts.Consts;
 import cn.zhucongqi.oauth2.consts.OAuthError;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
@@ -25,32 +25,46 @@ import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
 public abstract class OAuthValidator {
 
 	private HttpServletRequest request = null;
+	//request require parameter's name
     protected List<String> requiredParams = new ArrayList<String>();
+    //request require parameter's default value
     protected HashMap<String, String> paramDefaultValues = new HashMap<String, String>();
     
-    private ClientCredentials customClientCredentialsValidator = null;
+    private OAuthClientCredentials clientCredentials = null;
     
     public OAuthValidator(HttpServletRequest request) {
     	this.request = request;
+    	//default require scope and state
     	this.requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
     	this.requiredParams.add(Consts.AuthConsts.AUTH_STATE);
-        this.paramDefaultValuesValidation();
-    }
-    
-    public void setCustomClientCredentialsValidator(ClientCredentials customClientCredentialsValidator) {
-    	this.customClientCredentialsValidator = customClientCredentialsValidator;
+    	this.initRequiredParams();
+        this.initParamDefaultValues();
     }
 
+    
     /**
-     * param default value validation 
+     * Set client request's credentials validator
+     * @param clientCredentialsValidator
      */
-    public abstract void paramDefaultValuesValidation();
+    public void setClientCredentials(OAuthClientCredentials clientCredentials) {
+    	this.clientCredentials = clientCredentials;
+    }
+    
+    /**
+     * init required params
+     */
+    public abstract void initRequiredParams();
+
+    /**
+     * init param default value  
+     */
+    public abstract void initParamDefaultValues();
     
     /**
      * validate method
      * @throws OAuthProblemException
      */
-    protected void validateMethod() throws OAuthProblemException {
+    private void validateMethod() throws OAuthProblemException {
         String method = this.request.getMethod();
         if (!method.equals(Consts.HttpMethod.GET) && !method.equals(Consts.HttpMethod.POST)) {
             throw OAuthProblemException.error(OAuthError.CodeResponse.INVALID_REQUEST)
@@ -62,7 +76,7 @@ public abstract class OAuthValidator {
      * validate content type
      * @throws OAuthProblemException
      */
-    protected void validateContentType() throws OAuthProblemException {
+    private void validateContentType() throws OAuthProblemException {
         String contentType = this.request.getContentType();
         final String expectedContentType = Consts.ContentType.URL_ENCODED;
         if (!OAuthExceptionHandleKit.hasContentType(contentType, expectedContentType)) {
@@ -71,12 +85,12 @@ public abstract class OAuthValidator {
     }
 
     /**
-     * validate parameter
+     * validate require parameter
      * @throws OAuthProblemException
      */
-    protected void validateRequiredParameters() throws OAuthProblemException {
+    private void validateRequiredParameters() throws OAuthProblemException {
         final Set<String> missingParameters = new HashSet<String>();
-        for (String requiredParam : requiredParams) {
+        for (String requiredParam : this.requiredParams) {
             String val = this.request.getParameter(requiredParam);
             if (StrKit.isBlank(val)) {
                 missingParameters.add(requiredParam);
@@ -88,14 +102,14 @@ public abstract class OAuthValidator {
     }
     
     /**
-     * validate paramter values
+     * validate parameter default values
      * @throws OAuthProblemException
      */
-    protected void validateRequiredParameterValues() throws OAuthProblemException {
-    	final Set<String> keys = paramDefaultValues.keySet();
+    private void validateParameterDefaultValues() throws OAuthProblemException {
+    	final Set<String> keys = this.paramDefaultValues.keySet();
     	for (String key : keys) {
 			String param = this.request.getParameter(key);
-			String mustValue = paramDefaultValues.get(key);
+			String mustValue = this.paramDefaultValues.get(key);
 			if (StrKit.isBlank(param) 
 					|| (StrKit.notBlank(param) && !mustValue.equals(param))) {
 				throw OAuthExceptionHandleKit.handleInvalidValueException(param, mustValue);
@@ -127,18 +141,18 @@ public abstract class OAuthValidator {
 			throw OAuthExceptionHandleKit.handleMissingParameters(missingParameters);
 		}
 		
-		//validate parameters validation
-		this.customClientCredentialsValidator.validateClientCredentials(this.request);
+		//client credentials validation
+		this.clientCredentials.validateClientCredentials(this.request);
 	}
     
-    private String scope = "";
-    private String state = "";
-	private String clientId = null;
-	private String clientSecret = null;
-	private String code = null;
+    private String scope = "DEFAULT SCOPE";
+    private String state = "DEFAULT STATE";
+	private String clientId = "DEFAULT CLIENT_ID";
+	private String clientSecret = "DEFAULT_CLIENT_SECRET";
+	private String code = "DEFAULT_CODE";
     
     public String getScope() {
-		return scope;
+		return this.scope;
 	}
 
 	private void setScope(String scope) {
@@ -146,7 +160,7 @@ public abstract class OAuthValidator {
 	}
 
 	public String getState() {
-		return state;
+		return this.state;
 	}
 
 	private void setState(String state) {
@@ -154,7 +168,7 @@ public abstract class OAuthValidator {
 	}
 	
 	public String getClientId() {
-		return clientId;
+		return this.clientId;
 	}
 
 	private void setClientId(String clientId) {
@@ -162,7 +176,7 @@ public abstract class OAuthValidator {
 	}
 
 	public String getClientSecret() {
-		return clientSecret;
+		return this.clientSecret;
 	}
 
 	private void setClientSecret(String clientSecret) {
@@ -170,7 +184,7 @@ public abstract class OAuthValidator {
 	}
 
 	public String getCode() {
-		return code;
+		return this.code;
 	}
 
 	private void setCode(String code) {
@@ -178,10 +192,10 @@ public abstract class OAuthValidator {
 	}
 	
 	/**
-     * get client parameters
+     * init client parameters
      * @param request
      */
-    protected void getClientParameters() {
+    private void initClientParameters() {
     	// client and secret
     	String clientId = this.request.getParameter(Consts.AuthConsts.AUTH_CLIENT_ID);
     	if (StrKit.notBlank(clientId)) {
@@ -218,9 +232,9 @@ public abstract class OAuthValidator {
         this.validateContentType();
         this.validateMethod();
         this.validateRequiredParameters();
-        this.validateRequiredParameterValues();
+        this.validateParameterDefaultValues();
         
-        this.getClientParameters();
+        this.initClientParameters();
         //client credentials
 		this.validateClientCredentials();
     }

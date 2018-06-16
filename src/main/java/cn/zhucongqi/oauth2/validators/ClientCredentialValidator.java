@@ -47,12 +47,16 @@ public class ClientCredentialValidator extends OAuthValidator {
    
 	public ClientCredentialValidator(HttpServletRequest request) {
 		super(request);
-        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "client_credentials".
     }
 
 	@Override
-	public void paramDefaultValuesValidation() {
-		paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.CLIENT_CREDENTIALS.toString());
+	public void initParamDefaultValues() {
+		this.paramDefaultValues.put(OAuth.OAUTH_GRANT_TYPE, GrantType.CLIENT_CREDENTIALS.toString());
+	}
+
+	@Override
+	public void initRequiredParams() {
+		this.requiredParams.add(OAuth.OAUTH_GRANT_TYPE);//Value MUST be set to "client_credentials".
 	}
 
 }

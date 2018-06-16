@@ -5,15 +5,15 @@ import javax.servlet.http.HttpServletRequest;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
 /**
- * ClientCredentials
+ * AuthorizationClientCredentials
  * @author Jobsz
  *
  */
-public class ClientCredentials implements OAuthClientCredentials {
+public class AuthorizationClientCredentials implements OAuthClientCredentials {
 
 	@Override
 	public void validateClientCredentials(HttpServletRequest request) throws OAuthProblemException {
-		//TODO build your own client credentials code in here
+		//TODO build your own Authorization client credentials code in here
 	}
 	
 }
