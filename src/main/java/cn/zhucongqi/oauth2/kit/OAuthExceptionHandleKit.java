@@ -28,6 +28,12 @@ public class OAuthExceptionHandleKit {
 		return OAuthProblemException.error(RepErrCodes.REQ_ERR_CODE).description(message);
 	}
 
+	/**
+	 * checkout request context type
+	 * @param requestContentType
+	 * @param requiredContentType
+	 * @return
+	 */
 	public static boolean hasContentType(String requestContentType,
 			String requiredContentType) {
 		if (StrKit.isBlank(requiredContentType)
@@ -56,7 +62,8 @@ public class OAuthExceptionHandleKit {
 		return OAuthExceptionHandleKit
 				.handleInvalidReqOAuthProblemException(errorMsg.toString());
 	}
-
+	
+	
 	/**
 	 * handle miss parameter
 	 * @param missingParams

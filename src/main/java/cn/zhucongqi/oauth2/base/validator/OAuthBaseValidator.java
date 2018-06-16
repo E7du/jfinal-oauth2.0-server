@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cn.zhucongqi.oauth2.base.validator;
 
 import java.util.ArrayList;
@@ -15,12 +12,12 @@ import com.jfinal.kit.StrKit;
 
 import cn.zhucongqi.oauth2.clientcredentials.ClientCredentials;
 import cn.zhucongqi.oauth2.consts.Consts;
-import cn.zhucongqi.oauth2.consts.ErrorConsts;
+import cn.zhucongqi.oauth2.consts.OAuthError;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
 
 /**
- * 
+ * OAuth Request Validator
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  * @param <T>
@@ -33,7 +30,7 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
     private ClientCredentials<T> customClientCredentialsValidator = null;
     
     public OAuthBaseValidator() {
-        requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
+    	requiredParams.add(Consts.AuthConsts.AUTH_SCOPE);
         requiredParams.add(Consts.AuthConsts.AUTH_STATE);
     }
     
@@ -60,7 +57,7 @@ public abstract class OAuthBaseValidator<T extends HttpServletRequest> {
     protected void validateMethod(HttpServletRequest request) throws OAuthProblemException {
         String method = request.getMethod();
         if (!method.equals(Consts.HttpMethod.GET) && !method.equals(Consts.HttpMethod.POST)) {
-            throw OAuthProblemException.error(ErrorConsts.CodeResponse.INVALID_REQUEST)
+            throw OAuthProblemException.error(OAuthError.CodeResponse.INVALID_REQUEST)
                 .description("Method not correct.");
         }
     }

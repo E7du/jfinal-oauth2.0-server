@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cn.zhucongqi.oauth2.clientcredentials;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +10,12 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.kit.OAuthExceptionHandleKit;
 
 /**
+ * PasswordClientCredentials
  * @author Jobsz
  * @param <T>
  *
  */
-public class AccessTokenClientCredentials implements ClientCredentials<HttpServletRequest> {
+public class PasswordClientCredentials implements ClientCredentials<HttpServletRequest> {
 
 	@Override
 	public void validateClientCredentials(HttpServletRequest request) throws OAuthProblemException {

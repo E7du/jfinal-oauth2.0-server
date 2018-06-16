@@ -17,6 +17,12 @@ public abstract class OAuthError {
     public static final String OAUTH_ERROR_URI = "error_uri";
 
     public static final class CodeResponse {
+    	
+    	/**
+    	 * the request code is invalid.
+    	 */
+    	public static final String CODE_INVALID = "code_invalid";
+    	
         /**
          * The request is missing a required parameter, includes an
         unsupported parameter value, or is otherwise malformed.
@@ -25,15 +31,20 @@ public abstract class OAuthError {
         
         /**
          * The client is not authorized to request an authorization
-        code using this method.
+               code using this method.
          */
         public static final String UNAUTHORIZED_CLIENT = "unauthorized_client";
-
+        
         /**
          * The resource owner or authorization server denied the
         request.
          */
         public static final String ACCESS_DENIED = "access_denied";
+        
+        /**
+         * The authorization service receive more client request
+         */
+        public static final String REQUEST_FREQUENCY = "request_frequency";
 
         /**
          * The authorization server does not support obtaining an
@@ -53,7 +64,7 @@ public abstract class OAuthError {
         public static final String SERVER_ERROR = "server_error";
 
         /**
-         * The authorization server is currently unable to handle
+         *         The authorization server is currently unable to handle
         the request due to a temporary overloading or maintenance
         of the server.
          */

@@ -5,7 +5,7 @@ package cn.zhucongqi.oauth2.response;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.zhucongqi.oauth2.consts.ErrorConsts;
+import cn.zhucongqi.oauth2.consts.OAuthError;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
 /**
@@ -35,7 +35,7 @@ public class ErrorResponse extends Response {
 	 * @param error
 	 */
 	public ErrorResponse setError(String error) {
-		this.params.put(ErrorConsts.AUTH_ERROR, error);
+		this.params.put(OAuthError.OAUTH_ERROR, error);
 		return this;
 	}
 	
@@ -44,7 +44,7 @@ public class ErrorResponse extends Response {
 	 * @param errorDecription
 	 */
 	public ErrorResponse setErrorDescription(String errorDecription) {
-		this.params.put(ErrorConsts.AUTH_ERROR_DESCRIPTION, errorDecription);
+		this.params.put(OAuthError.OAUTH_ERROR_DESCRIPTION, errorDecription);
 		return this;
 	}
 }
