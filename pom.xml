@@ -5,7 +5,7 @@
 	<artifactId>jfinal-oauth2.0-server</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
-	<url>http://openingo.github.io/jfinal-oauth2.0-server/</url>
+	<url>https://github.com/E7du/jfinal-oauth2.0-server/</url>
 	<licenses>
 		<license>
 			<name>The Apache License, Version 2.0</name>
@@ -16,8 +16,8 @@
 		<developer>
 			<name>Jobsz</name>
 			<email>zcq@zhucongqi.cn</email>
-			<organization>OpeningO Co.,Ltd.</organization>
-			<organizationUrl>http://openingo.github.io/</organizationUrl>
+			<organization>E7du Co.,Ltd.</organization>
+			<organizationUrl>https://github.com/E7du/</organizationUrl>
 		</developer>
 	</developers>
 	<scm>
@@ -39,17 +39,23 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jfinal</groupId>
-			<artifactId>cos</artifactId>
-			<version>26Dec2008</version>
+			<version>1.2.47</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
+		</dependency>
+		<dependency>
+   			 <groupId>org.slf4j</groupId>
+   			 <artifactId>slf4j-nop</artifactId>
+    		<version>1.7.25</version>
+    		<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
 	</dependencies>
 	<build>
