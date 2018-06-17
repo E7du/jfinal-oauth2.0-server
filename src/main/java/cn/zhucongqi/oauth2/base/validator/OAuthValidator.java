@@ -122,45 +122,50 @@ public abstract class OAuthValidator {
 	private String clientId = "DEFAULT CLIENT_ID";
 	private String clientSecret = "DEFAULT_CLIENT_SECRET";
 	private String code = "DEFAULT_CODE";
+	private String username = "DEFAULT_USERNAME";
+	private String password = "DEFAULT_PASSWORD";
+	private String redirectUri = "DEFAULT_REDIRECT_URI";
+	private String accessToken = "DEFAULT_ACCESS_TOKEN";
+	private String refreshToken = "DEFAULT_REFRESH_TOKEN";
     
     public String getScope() {
 		return this.scope;
-	}
-
-	private void setScope(String scope) {
-		this.scope = scope;
 	}
 
 	public String getState() {
 		return this.state;
 	}
 
-	private void setState(String state) {
-		this.state = state;
-	}
-	
 	public String getClientId() {
 		return this.clientId;
-	}
-
-	private void setClientId(String clientId) {
-		this.clientId = clientId;
 	}
 
 	public String getClientSecret() {
 		return this.clientSecret;
 	}
 
-	private void setClientSecret(String clientSecret) {
-		this.clientSecret = clientSecret;
-	}
-
 	public String getCode() {
 		return this.code;
 	}
 
-	private void setCode(String code) {
-		this.code = code;
+	public String getUsername() {
+		return this.username;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public String getRedirectUri() {
+		return this.redirectUri;
+	}
+	
+	public String getAccessToken() {
+		return this.accessToken;
+	}
+	
+	public String getRefreshToken() {
+		return this.refreshToken;
 	}
 	
 	/**
@@ -171,27 +176,52 @@ public abstract class OAuthValidator {
     	// client and secret
     	String clientId = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CLIENT_ID);
     	if (StrKit.notBlank(clientId)) {
-        	this.setClientId(clientId);	
+        	this.clientId = clientId;
 		}
     	
     	String clientSecret = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CLIENT_SECRET);
     	if (StrKit.notBlank(clientSecret)) {
-        	this.setClientSecret(clientSecret);	
+        	this.clientSecret = clientSecret;
 		}
     	
     	String code = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CODE);
     	if (StrKit.notBlank(code)) {
-        	this.setCode(code);	
+        	this.code = code;
 		}
     	
     	String state = this.request.getParameter(OAuthConsts.OAuth.OAUTH_STATE);
 		if (StrKit.notBlank(state)) {
-			this.setState(state);
+			this.state = state;
 		}
 		
 		String scope = this.request.getParameter(OAuthConsts.OAuth.OAUTH_SCOPE);
 		if (StrKit.notBlank(scope)) {
-			this.setScope(scope);
+			this.scope = scope;
+		}
+		
+		String username = this.request.getParameter(OAuthConsts.OAuth.OAUTH_USERNAME);
+		if (StrKit.notBlank(username)) {
+			this.username = username;
+		}
+		
+		String password = this.request.getParameter(OAuthConsts.OAuth.OAUTH_PASSWORD);
+		if (StrKit.notBlank(password)) {
+			this.password = password;
+		}
+		
+		String redirectUri = this.request.getParameter(OAuthConsts.OAuth.OAUTH_REDIRECT_URI);
+		if (StrKit.notBlank(redirectUri)) {
+			this.redirectUri = redirectUri;
+		}
+		
+		String accessToken = this.request.getParameter(OAuthConsts.OAuth.OAUTH_ACCESS_TOKEN);
+		if (StrKit.notBlank(accessToken)) {
+			this.accessToken = accessToken;
+		}
+		
+		String refreshToken = this.request.getParameter(OAuthConsts.OAuth.OAUTH_REFRESH_TOKEN);
+		if (StrKit.notBlank(refreshToken)) {
+			this.refreshToken = refreshToken;
 		}
     }
 
@@ -209,6 +239,6 @@ public abstract class OAuthValidator {
         this.initClientParameters();
 		
 		//client credentials validation
-		this.clientCredentials.validateClientCredentials(this.request);
+		this.clientCredentials.validateClientCredentials(this.request, this);
     }
 }

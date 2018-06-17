@@ -5,7 +5,7 @@ package cn.zhucongqi.oauth2.consts;
  * @author Jobsz
  *
  */
-public class OAuthRequestConsts {
+public final class OAuthRequestConsts {
 
 	public static final int AUTHORIZATION_REQUEST = 0x11;
 	

@@ -8,6 +8,6 @@ package cn.zhucongqi.oauth2.consts;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class ViewPaths {
+public final class ViewPaths {
 	
 }

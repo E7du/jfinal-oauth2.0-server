@@ -8,6 +8,8 @@ package cn.zhucongqi.oauth2.response;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jfinal.kit.StrKit;
+
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
 import cn.zhucongqi.oauth2.message.OAuthResponse;
 import cn.zhucongqi.oauth2.message.types.TokenType;
@@ -45,7 +47,7 @@ public class OAuthASResponse extends OAuthResponse {
             super(responseCode);
             //AMBER-45
             String state=request.getParameter(OAuthConsts.OAuth.OAUTH_STATE);
-            if (state!=null){
+            if (StrKit.notBlank(state)){
             	this.setState(state);
             }
         }

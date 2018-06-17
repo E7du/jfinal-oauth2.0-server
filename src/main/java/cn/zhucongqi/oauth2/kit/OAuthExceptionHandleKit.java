@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.kit.StrKit;
 
-import cn.zhucongqi.oauth2.consts.RepErrCodes;
+import cn.zhucongqi.oauth2.consts.OAuthRequestErrCodes;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class OAuthExceptionHandleKit {
+public final class OAuthExceptionHandleKit {
 
 	private OAuthExceptionHandleKit() {
 
@@ -25,7 +25,7 @@ public class OAuthExceptionHandleKit {
 
 	private static OAuthProblemException handleInvalidReqOAuthProblemException(
 			String message) {
-		return OAuthProblemException.error(RepErrCodes.REQ_ERR_CODE, message);
+		return OAuthProblemException.error(OAuthRequestErrCodes.REQUEST_ERR_CODE, message);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class OAuthExceptionHandleKit {
 		return OAuthExceptionHandleKit.handleInvalidReqOAuthProblemException(sb.toString()
 				.trim());
 	}
-
+	
 	/**
 	 * handle invalid param default values
 	 * @param key paramKey
@@ -92,7 +92,7 @@ public class OAuthExceptionHandleKit {
 		StringBuilder desc = new StringBuilder(
 				"Invalid value for ").append(validValue).append(" the valid value is '").append(validValue).append("'");
 		return OAuthProblemException
-				.error(RepErrCodes.REQ_ERR_CODE)
+				.error(OAuthRequestErrCodes.REQUEST_ERR_CODE)
 				.description(desc.toString().trim())
 				.responseStatus(HttpServletResponse.SC_FORBIDDEN);
 	}
@@ -103,7 +103,7 @@ public class OAuthExceptionHandleKit {
 	 */
 	public static OAuthProblemException handleInvalidClientException() {
 		return OAuthProblemException
-				.error(RepErrCodes.REQ_ERR_CODE)
+				.error(OAuthRequestErrCodes.REQUEST_ERR_CODE)
 				.description("Invalid Client")
 				.responseStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	}

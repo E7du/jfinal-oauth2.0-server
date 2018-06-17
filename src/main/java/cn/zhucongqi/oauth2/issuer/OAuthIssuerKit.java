@@ -9,9 +9,9 @@ package cn.zhucongqi.oauth2.issuer;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class OAuthIssuerKit implements OAuthIssuer {
+public final class OAuthIssuerKit implements OAuthIssuer {
 
-    private ValueGenerator vg;
+    private ValueGenerator vg = null;
 
     private OAuthIssuerKit(ValueGenerator vg) {
         this.vg = vg;

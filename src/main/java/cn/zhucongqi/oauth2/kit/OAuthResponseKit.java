@@ -1,17 +1,20 @@
 /**
  * 
  */
-package cn.zhucongqi.oauth2.response;
+package cn.zhucongqi.oauth2.kit;
 
 import javax.servlet.http.HttpServletRequest;
 
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
+import cn.zhucongqi.oauth2.response.AccessToken;
+import cn.zhucongqi.oauth2.response.CodeResponse;
+import cn.zhucongqi.oauth2.response.ErrorResponse;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class ResponseKit {
+public final class OAuthResponseKit {
 	
 	public static CodeResponse codeRep(HttpServletRequest request) {
 		return (new CodeResponse(request));

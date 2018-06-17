@@ -23,7 +23,7 @@ public class OAuthService extends Service implements OAuthApi {
 //	
 //	private void repErrorToClient(HttpServletRequest request, OAuthProblemException e) {
 //		// rep error to client
-//		ErrorResponse errorRep = ResponseKit.errorRep(request, e);
+//		ErrorResponse errorRep = OAuthResponseKit.errorRep(request, e);
 ////		this.controller.getResponse().setStatus(e.getResponseStatus());
 //		this.log.error("authproblem =>"+e.getMessage());
 //		this.controller.renderJson(errorRep.param());
@@ -36,7 +36,7 @@ public class OAuthService extends Service implements OAuthApi {
 //		String refreshToken = issuer.refreshToken();
 //		//store access token and refresh token and account
 //		//rep to client
-//		AccessToken accessTokenRep = ResponseKit.tokenRep(request);
+//		AccessToken accessTokenRep = OAuthResponseKit.tokenRep(request);
 //		accessTokenRep.setAccessToken(accessToken)
 //		.setExpiresIn(Consts.TOKEN_EXPIRES_IN)
 //		.setRefreshToken(refreshToken);

@@ -8,7 +8,7 @@ package cn.zhucongqi.oauth2.consts;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class Consts {
+public final class Consts {
 
 	/**
 	 * CaptchaRender random key

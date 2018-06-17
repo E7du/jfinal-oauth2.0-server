@@ -8,7 +8,7 @@ package cn.zhucongqi.oauth2.consts;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class ActionUrls {
+public final class ActionUrls {
 	
 	public static final String BASE_URL = "oauth2/";
 	// authrize url

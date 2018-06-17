@@ -14,7 +14,6 @@ import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -28,8 +27,6 @@ import org.apache.commons.codec.binary.Base64;
 import com.jfinal.kit.StrKit;
 
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
-import cn.zhucongqi.oauth2.consts.OAuthError;
-import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
 /**
  * Common OAuthConsts Utils class.
@@ -136,49 +133,6 @@ public final class OAuthKit {
         return sb.toString();
     }
 
-    /**
-     * Creates invalid_request exception with given message
-     *
-     * @param message error message
-     * @return OAuthException
-     */
-    public static OAuthProblemException handleOAuthProblemException(String message) {
-        return OAuthProblemException.error(OAuthError.TokenResponse.INVALID_REQUEST)
-            .description(message);
-    }
-    
-    /**
-     * Creates OAuthProblemException that contains set of missing oauth parameters
-     *
-     * @param missingParams missing oauth parameters
-     * @return OAuthProblemException with user friendly message about missing oauth parameters
-     */
-    public static OAuthProblemException handleMissingParameters(Set<String> missingParams) {
-        StringBuffer sb = new StringBuffer("Missing parameters: ");
-        if (!OAuthKit.isEmpty(missingParams)) {
-            for (String missingParam : missingParams) {
-                sb.append(missingParam).append(" ");
-            }
-        }
-        return handleOAuthProblemException(sb.toString().trim());
-    }
-
-    public static OAuthProblemException handleBadContentTypeException(String expectedContentType) {
-        StringBuilder errorMsg = new StringBuilder("Bad request content type. Expecting: ").append(
-            expectedContentType);
-        return handleOAuthProblemException(errorMsg.toString());
-    }
-
-    public static OAuthProblemException handleNotAllowedParametersOAuthException(
-        List<String> notAllowedParams) {
-        StringBuffer sb = new StringBuffer("Not allowed parameters: ");
-        if (notAllowedParams != null) {
-            for (String notAllowed : notAllowedParams) {
-                sb.append(notAllowed).append(" ");
-            }
-        }
-        return handleOAuthProblemException(sb.toString().trim());
-    }
 
     /**
      * Parse a form-urlencoded document.
@@ -224,13 +178,6 @@ public final class OAuthKit {
         } catch (java.io.UnsupportedEncodingException wow) {
             throw new RuntimeException(wow.getMessage(), wow);
         }
-    }
-
-    private static boolean isEmpty(Set<String> missingParams) {
-        if (missingParams == null || missingParams.size() == 0) {
-            return true;
-        }
-        return false;
     }
 
     public static String getAuthHeaderField(String authHeader) {
