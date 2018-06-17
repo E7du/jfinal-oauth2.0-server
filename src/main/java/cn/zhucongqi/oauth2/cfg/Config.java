@@ -56,7 +56,7 @@ public class Config extends JFinalConfigExt {
 	}
 
 	@Override
-	public void configEngine(Engine me) {
+	public void configEngineMore(Engine me) {
 		
 	}
 }
