@@ -155,9 +155,9 @@ package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.zhucongqi.oauth2.base.response.types.ResponseType;
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
-import cn.zhucongqi.oauth2.message.types.ResponseType;
 
 
 /**

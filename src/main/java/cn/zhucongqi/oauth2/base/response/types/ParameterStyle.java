@@ -1,22 +1,22 @@
 /**
  * 
  */
-package cn.zhucongqi.oauth2.message.types;
+package cn.zhucongqi.oauth2.base.response.types;
 
 /**
+ * 
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public enum RequestType {
-
-	// link OAuthGrantRequst
-	GRANT_REQUEST("grant_request"),
-	// link OAuthRequest
-	CODE_TOKEN_REQUEST("code_token_request");
+public enum ParameterStyle {
+	
+    BODY("body"),
+    QUERY("query"),
+    HEADER("header");
 
     private String parameterStyle;
 
-	RequestType(String parameterStyle) {
+    ParameterStyle(String parameterStyle) {
         this.parameterStyle = parameterStyle;
     }
 

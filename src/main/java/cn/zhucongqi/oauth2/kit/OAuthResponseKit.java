@@ -3,12 +3,11 @@
  */
 package cn.zhucongqi.oauth2.kit;
 
-import javax.servlet.http.HttpServletRequest;
-
+import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
-import cn.zhucongqi.oauth2.response.AccessToken;
-import cn.zhucongqi.oauth2.response.CodeResponse;
-import cn.zhucongqi.oauth2.response.ErrorResponse;
+import cn.zhucongqi.oauth2.response.OAuthAccessToken;
+import cn.zhucongqi.oauth2.response.OAuthCodeResponse;
+import cn.zhucongqi.oauth2.response.OAuthErrResponse;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
@@ -16,15 +15,15 @@ import cn.zhucongqi.oauth2.response.ErrorResponse;
  */
 public final class OAuthResponseKit {
 	
-	public static CodeResponse codeRep(HttpServletRequest request) {
-		return (new CodeResponse(request));
+	public static OAuthCodeResponse codeRep(OAuthValidator validator) {
+		return (new OAuthCodeResponse(validator));
 	}
 	
-	public static AccessToken tokenRep(HttpServletRequest request) {
-		return (new AccessToken(request));
+	public static OAuthAccessToken tokenRep(OAuthValidator validator) {
+		return (new OAuthAccessToken(validator));
 	}
 
-	public static ErrorResponse errorRep(HttpServletRequest request, OAuthProblemException e) {
-		return (new ErrorResponse(request,e));
+	public static OAuthErrResponse errorRep(OAuthValidator validator, OAuthProblemException e) {
+		return (new OAuthErrResponse(validator, e));
 	}
 }

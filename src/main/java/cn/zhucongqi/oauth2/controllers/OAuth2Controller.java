@@ -3,8 +3,6 @@
  */
 package cn.zhucongqi.oauth2.controllers;
 
-import javax.management.RuntimeErrorException;
-
 import com.jfinal.aop.Before;
 import com.jfinal.core.ActionKey;
 import com.jfinal.ext.core.ControllerExt;
@@ -67,9 +65,7 @@ public class OAuth2Controller extends ControllerExt {
 	 */
 	@ActionKey(ActionUrls.ACCESS_TOKEN_URL)
 	public void onAcessToken() {
-		throw new RuntimeErrorException(null);
-		
-		//this.oauthService.accessToken();
+		this.oauthService.accessToken();
 	}
 	
 	/**

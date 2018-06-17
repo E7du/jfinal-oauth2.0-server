@@ -49,7 +49,7 @@
    redirection response, or by other means available to it via the
    user-agent.
    
-   4.1.2.  Authorization Response
+   4.1.2.  Authorization OAuthResponse
 
 
    If the resource owner grants the access request, the authorization
@@ -93,9 +93,9 @@ package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.zhucongqi.oauth2.base.response.types.ResponseType;
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
-import cn.zhucongqi.oauth2.message.types.ResponseType;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]

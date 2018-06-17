@@ -27,6 +27,7 @@ import cn.zhucongqi.oauth2.validators.RefreshTokenValidator;
  */
 public class OAuthRequest {
 
+	private HttpServletRequest request = null;
 	private OAuthValidator validator = null;
 	
 	/**
@@ -34,6 +35,7 @@ public class OAuthRequest {
 	 * @param request
 	 */
 	public OAuthRequest(HttpServletRequest request) {
+		this.request = request;
 		this.validator = new AccessTokenRequestValidator(request);
 	}
 	
@@ -90,6 +92,14 @@ public class OAuthRequest {
 		return this.validator;
 	}
 
+	/**
+	 * Get current request
+	 * @return
+	 */
+	public HttpServletRequest getRequest() {
+		return this.request;
+	}
+	
 	 /**
      * validate request
      * 

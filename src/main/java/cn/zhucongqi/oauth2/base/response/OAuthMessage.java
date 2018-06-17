@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.zhucongqi.oauth2.message;
+package cn.zhucongqi.oauth2.base.response;
 
 import java.util.Map;
 

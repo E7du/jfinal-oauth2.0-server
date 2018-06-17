@@ -1,7 +1,5 @@
 package cn.zhucongqi.oauth2.base.clientcredentials;
 
-import javax.servlet.http.HttpServletRequest;
-
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
@@ -15,5 +13,5 @@ public interface OAuthClientCredentials {
 	 * @param request
 	 * @throws AuthProblemException
 	 */
-	public void validateClientCredentials(HttpServletRequest request, OAuthValidator validator) throws OAuthProblemException;
+	public void validateClientCredentials(OAuthValidator validator) throws OAuthProblemException;
 }

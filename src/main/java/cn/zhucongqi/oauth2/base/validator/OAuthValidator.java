@@ -51,7 +51,7 @@ public abstract class OAuthValidator {
     }
     
     /**
-     * init required params
+     * init required parameters
      */
     public abstract void initRequiredParams();
 
@@ -112,62 +112,22 @@ public abstract class OAuthValidator {
 			String mustValue = this.paramDefaultValues.get(key);
 			if (StrKit.isBlank(param) 
 					|| (StrKit.notBlank(param) && !mustValue.equals(param))) {
-				throw OAuthExceptionHandleKit.handleInvalidValueException(param, mustValue);
+				throw OAuthExceptionHandleKit.handleInvalidValueException(key, mustValue, param);
 			}
 		}
     }
     
     private String scope = "DEFAULT SCOPE";
     private String state = "DEFAULT STATE";
-	private String clientId = "DEFAULT CLIENT_ID";
-	private String clientSecret = "DEFAULT_CLIENT_SECRET";
-	private String code = "DEFAULT_CODE";
-	private String username = "DEFAULT_USERNAME";
-	private String password = "DEFAULT_PASSWORD";
-	private String redirectUri = "DEFAULT_REDIRECT_URI";
-	private String accessToken = "DEFAULT_ACCESS_TOKEN";
-	private String refreshToken = "DEFAULT_REFRESH_TOKEN";
+	private String clientId = "";
+	private String clientSecret = "";
+	private String code = "";
+	private String username = "";
+	private String password = "";
+	private String redirectUri = "";
+	private String accessToken = "";
+	private String refreshToken = "";
     
-    public String getScope() {
-		return this.scope;
-	}
-
-	public String getState() {
-		return this.state;
-	}
-
-	public String getClientId() {
-		return this.clientId;
-	}
-
-	public String getClientSecret() {
-		return this.clientSecret;
-	}
-
-	public String getCode() {
-		return this.code;
-	}
-
-	public String getUsername() {
-		return this.username;
-	}
-	
-	public String getPassword() {
-		return this.password;
-	}
-	
-	public String getRedirectUri() {
-		return this.redirectUri;
-	}
-	
-	public String getAccessToken() {
-		return this.accessToken;
-	}
-	
-	public String getRefreshToken() {
-		return this.refreshToken;
-	}
-	
 	/**
      * init client parameters
      * @param request
@@ -224,7 +184,51 @@ public abstract class OAuthValidator {
 			this.refreshToken = refreshToken;
 		}
     }
+	
+    public String getScope() {
+		return this.scope;
+	}
 
+	public String getState() {
+		return this.state;
+	}
+
+	public String getClientId() {
+		return this.clientId;
+	}
+
+	public String getClientSecret() {
+		return this.clientSecret;
+	}
+
+	public String getCode() {
+		return this.code;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public String getRedirectUri() {
+		return this.redirectUri;
+	}
+	
+	public String getAccessToken() {
+		return this.accessToken;
+	}
+	
+	public String getRefreshToken() {
+		return this.refreshToken;
+	}
+	
+	public HttpServletRequest getRequest() {
+		return this.request;
+	}
+	
     /**
      * validate request
      * 
@@ -239,6 +243,6 @@ public abstract class OAuthValidator {
         this.initClientParameters();
 		
 		//client credentials validation
-		this.clientCredentials.validateClientCredentials(this.request, this);
+		this.clientCredentials.validateClientCredentials(this);
     }
 }

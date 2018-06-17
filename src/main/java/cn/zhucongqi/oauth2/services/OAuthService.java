@@ -11,6 +11,7 @@ import cn.zhucongqi.oauth2.base.services.OAuthApi;
 import cn.zhucongqi.oauth2.consts.OAuthRequestConsts;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.request.OAuthRequest;
+import cn.zhucongqi.oauth2.response.OAuthErrResponse;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
@@ -23,7 +24,7 @@ public class OAuthService extends Service implements OAuthApi {
 //	
 //	private void repErrorToClient(HttpServletRequest request, OAuthProblemException e) {
 //		// rep error to client
-//		ErrorResponse errorRep = OAuthResponseKit.errorRep(request, e);
+//		OAuthErrResponse errorRep = OAuthResponseKit.errorRep(request, e);
 ////		this.controller.getResponse().setStatus(e.getResponseStatus());
 //		this.log.error("authproblem =>"+e.getMessage());
 //		this.controller.renderJson(errorRep.param());
@@ -36,7 +37,7 @@ public class OAuthService extends Service implements OAuthApi {
 //		String refreshToken = issuer.refreshToken();
 //		//store access token and refresh token and account
 //		//rep to client
-//		AccessToken accessTokenRep = OAuthResponseKit.tokenRep(request);
+//		OAuthAccessToken accessTokenRep = OAuthResponseKit.tokenRep(request);
 //		accessTokenRep.setAccessToken(accessToken)
 //		.setExpiresIn(Consts.TOKEN_EXPIRES_IN)
 //		.setRefreshToken(refreshToken);
@@ -68,28 +69,32 @@ public class OAuthService extends Service implements OAuthApi {
 	public void accessToken() {
 		HttpServletRequest req = this.controller.getRequest();
 		OAuthRequest request = new OAuthRequest(req, OAuthRequestConsts.ACCESS_TOKEN_REQUEST);
+		Object o = null;
 		try {
 			request.validate();
 		} catch (OAuthProblemException e) {
 			e.printStackTrace();
 			this.controller.onExceptionError(e);
+			OAuthErrResponse error = new OAuthErrResponse(request.getValidator(), e);
+			o = error.parameters();
 		}
 		
-		this.controller.renderJson(req.getParameterMap());
+		this.controller.renderJson(o);
 	}
 	
 	@Override
 	public void secureAccessToken() {
 		HttpServletRequest req = this.controller.getRequest();
 		OAuthRequest request = new OAuthRequest(req, OAuthRequestConsts.PASSOWRD_CREDENTIAL_REQUEST);
+		Object o = null;
 		try {
 			request.validate();
 		} catch (OAuthProblemException e) {
-			e.printStackTrace();
-			throw e;
+			OAuthErrResponse error = new OAuthErrResponse(request.getValidator(), e);
+			o = error.parameters();
 		}
 		
-		this.controller.renderJson(req.getParameterMap());
+		this.controller.renderJson(o);
 	}
 
 	@Override

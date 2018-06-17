@@ -73,8 +73,15 @@ public final class OAuthExceptionHandleKit {
 			Set<String> missingParams) {
 		StringBuilder sb = new StringBuilder("Missing parameters: ");
 		if (missingParams != null && !missingParams.isEmpty()) {
+			boolean first = true;
 			for (String missingParam : missingParams) {
-				sb.append(missingParam).append(" ");
+				if (first) {
+					first = false;
+				}
+	            else {
+	                sb.append(", ");
+	            }
+				sb.append(missingParam);
 			}
 		}
 		return OAuthExceptionHandleKit.handleInvalidReqOAuthProblemException(sb.toString()
@@ -88,12 +95,12 @@ public final class OAuthExceptionHandleKit {
 	 * @return
 	 */
 	public static OAuthProblemException handleInvalidValueException(String paramKey,
-			String validValue) {
-		StringBuilder desc = new StringBuilder(
-				"Invalid value for ").append(validValue).append(" the valid value is '").append(validValue).append("'");
+			String validValue, String currentValue) {
+		String format = "Invalid value for '%s'.the valid value is '%s',current value is '%s'.";
+		String desc = String.format(format, paramKey, validValue, currentValue);
 		return OAuthProblemException
 				.error(OAuthRequestErrCodes.REQUEST_ERR_CODE)
-				.description(desc.toString().trim())
+				.description(desc.trim())
 				.responseStatus(HttpServletResponse.SC_FORBIDDEN);
 	}
 	

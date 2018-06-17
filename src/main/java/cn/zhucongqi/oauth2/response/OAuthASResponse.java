@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.kit.StrKit;
 
+import cn.zhucongqi.oauth2.base.response.OAuthResponse0;
+import cn.zhucongqi.oauth2.base.response.types.TokenType;
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
-import cn.zhucongqi.oauth2.message.OAuthResponse;
-import cn.zhucongqi.oauth2.message.types.TokenType;
 
 /**
  * 
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class OAuthASResponse extends OAuthResponse {
+public class OAuthASResponse extends OAuthResponse0 {
 
     protected OAuthASResponse(String uri, int responseStatus) {
         super(uri, responseStatus);

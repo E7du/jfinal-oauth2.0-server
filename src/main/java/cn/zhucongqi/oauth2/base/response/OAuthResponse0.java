@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.zhucongqi.oauth2.message;
+package cn.zhucongqi.oauth2.base.response;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ import cn.zhucongqi.oauth2.parameters.JSONBodyParametersApplier;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class OAuthResponse implements OAuthMessage {
+public class OAuthResponse0 implements OAuthMessage {
 
     protected int responseStatus;
     protected String uri;
@@ -29,7 +29,7 @@ public class OAuthResponse implements OAuthMessage {
 
     protected Map<String, String> headers = new HashMap<String, String>();
 
-    protected OAuthResponse(String uri, int responseStatus) {
+    protected OAuthResponse0(String uri, int responseStatus) {
         this.uri = uri;
         this.responseStatus = responseStatus;
     }
@@ -122,10 +122,10 @@ public class OAuthResponse implements OAuthMessage {
             return this;
         }
 
-        public OAuthResponse buildJSONMessage() {
-            OAuthResponse msg = new OAuthResponse(location, responseCode);
+        public OAuthResponse0 buildJSONMessage() {
+            OAuthResponse0 msg = new OAuthResponse0(location, responseCode);
             this.applier = new JSONBodyParametersApplier();
-            return (OAuthResponse)applier.applyOAuthParameters(msg, parameters);
+            return (OAuthResponse0)applier.applyOAuthParameters(msg, parameters);
         }
 
     }

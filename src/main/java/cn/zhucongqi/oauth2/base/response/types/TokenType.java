@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.zhucongqi.oauth2.message.types;
+package cn.zhucongqi.oauth2.base.response.types;
 
 /**
  * 

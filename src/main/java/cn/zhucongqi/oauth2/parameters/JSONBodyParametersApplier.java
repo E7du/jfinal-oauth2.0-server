@@ -6,9 +6,9 @@ package cn.zhucongqi.oauth2.parameters;
 
 import java.util.Map;
 
-import cn.zhucongqi.oauth2.message.OAuthMessage;
-
 import com.jfinal.kit.JsonKit;
+
+import cn.zhucongqi.oauth2.base.response.OAuthMessage;
 
 /**
  * 

@@ -11,7 +11,7 @@ package cn.zhucongqi.oauth2.consts;
  */
 public abstract class OAuthError {
 
-    //error response params
+    //error response parameters
     public static final String OAUTH_ERROR = "error";
     public static final String OAUTH_ERROR_DESCRIPTION = "error_description";
     public static final String OAUTH_ERROR_URI = "error_uri";

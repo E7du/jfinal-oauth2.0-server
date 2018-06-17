@@ -3,8 +3,8 @@
  */
 package cn.zhucongqi.oauth2.consts;
 
-import cn.zhucongqi.oauth2.message.types.ParameterStyle;
-import cn.zhucongqi.oauth2.message.types.TokenType;
+import cn.zhucongqi.oauth2.base.response.types.ParameterStyle;
+import cn.zhucongqi.oauth2.base.response.types.TokenType;
 
 /**
  * 

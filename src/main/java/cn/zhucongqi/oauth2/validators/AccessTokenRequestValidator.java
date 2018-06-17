@@ -23,7 +23,7 @@
          REQUIRED, if the client is not authenticating with the
          authorization server as described in Section 3.2.1.
          
-   4.1.4.  Access Token Response
+   4.1.4.  Access Token OAuthResponse
 
 
    If the access token request is valid and authorized, the
@@ -51,9 +51,9 @@ package cn.zhucongqi.oauth2.validators;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.zhucongqi.oauth2.base.response.types.GrantType;
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
-import cn.zhucongqi.oauth2.message.types.GrantType;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]

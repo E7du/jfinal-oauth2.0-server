@@ -3,8 +3,8 @@
  */
 package cn.zhucongqi.oauth2.response;
 
-import javax.servlet.http.HttpServletRequest;
-
+import cn.zhucongqi.oauth2.base.response.OAuthResponse;
+import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
 
 
@@ -20,18 +20,18 @@ import cn.zhucongqi.oauth2.consts.OAuthConsts;
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public class AccessToken extends Response {
+public class OAuthAccessToken extends OAuthResponse {
 	
-	public AccessToken(HttpServletRequest request) {
-		super(request);
+	public OAuthAccessToken(OAuthValidator validator) {
+		super(validator);
 	}
 	
 	/**
 	 * Set Access　Token
 	 * @param accessToken
 	 */
-	public AccessToken setAccessToken(String accessToken) {
-		this.params.put(OAuthConsts.OAuth.OAUTH_ACCESS_TOKEN, accessToken);
+	public OAuthAccessToken setAccessToken(String accessToken) {
+		this.putParameter(OAuthConsts.OAuth.OAUTH_ACCESS_TOKEN, accessToken);
 		return this;
 	}
 	
@@ -39,8 +39,8 @@ public class AccessToken extends Response {
 	 * Set Expires In
 	 * @param expiresIn
 	 */
-	public AccessToken setExpiresIn(String expiresIn) {
-		this.params.put(OAuthConsts.OAuth.OAUTH_EXPIRES_IN, expiresIn);
+	public OAuthAccessToken setExpiresIn(String expiresIn) {
+		this.putParameter(OAuthConsts.OAuth.OAUTH_EXPIRES_IN, expiresIn);
 		return this;
 	}
 	
@@ -48,8 +48,8 @@ public class AccessToken extends Response {
 	 * Set Refresh Token
 	 * @param refreshToken
 	 */
-	public AccessToken setRefreshToken(String refreshToken) {
-		this.params.put(OAuthConsts.OAuth.OAUTH_REFRESH_TOKEN, refreshToken);
+	public OAuthAccessToken setRefreshToken(String refreshToken) {
+		this.putParameter(OAuthConsts.OAuth.OAUTH_REFRESH_TOKEN, refreshToken);
 		return this;
 	}
 }
