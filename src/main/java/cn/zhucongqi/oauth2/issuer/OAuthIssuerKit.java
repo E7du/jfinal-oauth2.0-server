@@ -17,12 +17,8 @@ public final class OAuthIssuerKit implements OAuthIssuer {
         this.vg = vg;
     }
 
-    public static OAuthIssuerKit md5Issuer() {
-    	return (new OAuthIssuerKit(new MD5Generator()));
-    }
-    
-    public static OAuthIssuerKit uuidIssuer() {
-    	return (new OAuthIssuerKit(new UUIDValueGenerator()));
+    public static OAuthIssuerKit issuer() {
+    	return (new OAuthIssuerKit(new ValueGenerator()));
     }
     
     public String accessToken() {

@@ -4,6 +4,7 @@
 package cn.zhucongqi.oauth2.response;
 
 import cn.zhucongqi.oauth2.base.response.OAuthResponse;
+import cn.zhucongqi.oauth2.base.response.types.TokenType;
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.Consts;
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
@@ -24,12 +25,8 @@ import cn.zhucongqi.oauth2.issuer.OAuthIssuerKit;
  */
 public class OAuthAccessToken extends OAuthResponse {
 	
-	private String accessToken = "";
-	private String expiresIn = "";
-	private String refreshToken = "";
-	private OAuthIssuerKit issuer = null;
-	
-	private void init() {
+	@Override
+	protected void init() {
 		this.setAccessToken(this.issuer.accessToken());
 		this.setRefreshToken(this.issuer.refreshToken());
 		this.setExpiresIn(Consts.TOKEN_EXPIRES_IN);//default value
@@ -37,14 +34,11 @@ public class OAuthAccessToken extends OAuthResponse {
 	
 	public OAuthAccessToken(OAuthValidator validator) {
 		super(validator);
-		this.issuer = OAuthIssuerKit.uuidIssuer();
-		this.init();
 	}
 	
 	public OAuthAccessToken(OAuthValidator validator, OAuthIssuerKit issuer) {
 		super(validator);
 		this.issuer = issuer;
-		this.init();
 	}
 	
 	/**
@@ -52,27 +46,16 @@ public class OAuthAccessToken extends OAuthResponse {
 	 * @param accessToken
 	 */
 	private OAuthAccessToken setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
 		this.putParameter(OAuthConsts.OAuth.OAUTH_ACCESS_TOKEN, accessToken);
 		return this;
 	}
 	
-	public String getAccessToken() {
-		return this.accessToken;
-	}
-	
 	/**
-	 * Set Expires In
-	 * @param expiresIn
+	 * Get AccessToken
+	 * @return
 	 */
-	public OAuthAccessToken setExpiresIn(String expiresIn) {
-		this.expiresIn = expiresIn;
-		this.putParameter(OAuthConsts.OAuth.OAUTH_EXPIRES_IN, expiresIn);
-		return this;
-	}
-	
-	public String getExpriresIn() {
-		return this.expiresIn;
+	public String getAccessToken() {
+		return this.getParamter(OAuthConsts.OAuth.OAUTH_ACCESS_TOKEN);
 	}
 	
 	/**
@@ -80,12 +63,69 @@ public class OAuthAccessToken extends OAuthResponse {
 	 * @param refreshToken
 	 */
 	private OAuthAccessToken setRefreshToken(String refreshToken) {
-		this.refreshToken = refreshToken;
 		this.putParameter(OAuthConsts.OAuth.OAUTH_REFRESH_TOKEN, refreshToken);
 		return this;
 	}
 	
+	/**
+	 * Get RefreshToken
+	 * @return
+	 */
 	public String getRefreshToken() {
-		return this.refreshToken;
+		return this.getParamter(OAuthConsts.OAuth.OAUTH_REFRESH_TOKEN);
 	}
+	
+	/**
+	 * Set Expires In
+	 * @param expiresIn
+	 */
+	private OAuthAccessToken setExpiresIn(String expiresIn) {
+		this.putParameter(OAuthConsts.OAuth.OAUTH_EXPIRES_IN, expiresIn);
+		return this;
+	}
+	
+	/**
+	 * Get Token ExpriresIn
+	 * @return
+	 */
+	public String getExpriresIn() {
+		return this.getParamter(OAuthConsts.OAuth.OAUTH_EXPIRES_IN);
+	}
+	
+	/**
+	 * Set Token Type
+	 * @param tokenType
+	 * @return
+	 */
+	public OAuthAccessToken setTokenType(TokenType tokenType) {
+		this.putParameter(OAuthConsts.OAuth.OAUTH_TOKEN_TYPE, tokenType.toString());
+		return this;
+	}
+	
+	/**
+	 * Get Token Type
+	 * @return
+	 */
+	public TokenType getTokenType() {
+		return TokenType.valueOf(this.getParamter(OAuthConsts.OAuth.OAUTH_TOKEN_TYPE));
+	}
+	
+	/**
+	 * Set Example Parameter
+	 * @param exampleParamter
+	 * @return
+	 */
+	public OAuthAccessToken setExampleParamter(String exampleParamter) {
+		this.putParameter(OAuthConsts.OAuth.OAUTH_EXAMPLE_PARAMETER, exampleParamter);
+		return this;
+    }
+	
+	/**
+	 * Get Example Parameter
+	 * @return
+	 */
+	public String getExampleParameter() {
+		return this.getParamter(OAuthConsts.OAuth.OAUTH_EXAMPLE_PARAMETER);
+	}
+	
 }

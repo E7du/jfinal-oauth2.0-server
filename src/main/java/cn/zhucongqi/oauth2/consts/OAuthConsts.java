@@ -50,7 +50,7 @@ public final class OAuthConsts {
         public static final String OAUTH_SCOPE = "scope";
         public static final String OAUTH_STATE = "state";
         public static final String OAUTH_GRANT_TYPE = "grant_type";
-        public static final String OAUTH_CODE = "code";
+        public static final String OAUTH_AUTHORIZATION_CODE = "code";
         public static final String OAUTH_ACCESS_TOKEN = "access_token";
         public static final String OAUTH_EXPIRES_IN = "expires_in";
         public static final String OAUTH_REFRESH_TOKEN = "refresh_token";

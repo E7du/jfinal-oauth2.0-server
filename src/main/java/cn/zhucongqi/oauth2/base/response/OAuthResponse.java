@@ -10,6 +10,7 @@ import com.jfinal.kit.StrKit;
 
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
+import cn.zhucongqi.oauth2.issuer.OAuthIssuerKit;
 
 /**
  * @author Jobsz [zcq@zhucongqi.cn]
@@ -18,12 +19,12 @@ import cn.zhucongqi.oauth2.consts.OAuthConsts;
 public abstract class OAuthResponse {
 	
 	protected HashMap<String, String> parameters = null;
-	private String scope = "";
-	private String state = "";
+	protected OAuthIssuerKit issuer = null;
 	
 	public OAuthResponse(OAuthValidator validator) {
 		this.parameters = new HashMap<String, String>();
-		
+		this.issuer = OAuthIssuerKit.issuer();
+		this.init();
 		String state = validator.getState();
 		if (StrKit.notBlank(state)) {
 			this.setState(state);
@@ -35,26 +36,30 @@ public abstract class OAuthResponse {
 		}
 	}
 	
+	protected abstract void init();
+	
 	protected void putParameter(String parameter, String value) {
 		this.parameters.put(parameter, value);
 	}
 	
+	protected String getParamter(String parameter) {
+		return this.parameters.get(parameter);
+	}
+	
 	private void setState(String state) {
-		this.state = state;
-		this.putParameter(OAuthConsts.OAuth.OAUTH_STATE, this.state);
+		this.putParameter(OAuthConsts.OAuth.OAUTH_STATE, state);
 	}
 	
 	public String getState() {
-		return this.state;
+		return this.getParamter(OAuthConsts.OAuth.OAUTH_STATE);
 	}
 	
 	private void setScope(String scope) {
-		this.scope = scope;
-		this.putParameter(OAuthConsts.OAuth.OAUTH_SCOPE, this.scope);
+		this.putParameter(OAuthConsts.OAuth.OAUTH_SCOPE, scope);
 	}
 	
 	public String getScope() {
-		return this.scope;
+		return this.getParamter(OAuthConsts.OAuth.OAUTH_SCOPE);
 	}
 	
 	/**
@@ -72,6 +77,6 @@ public abstract class OAuthResponse {
 
 	@Override
 	public String toString() {
-		return "OAuthResponse [parameters=" + parameters + ", scope=" + scope + ", state=" + state + "] AND JSON Format "+JsonKit.toJson(this);
+		return "OAuthResponse [parameters=" + parameters + "] AND JSON Format "+JsonKit.toJson(this);
 	}
 }

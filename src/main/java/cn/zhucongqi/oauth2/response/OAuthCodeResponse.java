@@ -13,6 +13,11 @@ import cn.zhucongqi.oauth2.consts.OAuthConsts;
  */
 public class OAuthCodeResponse extends OAuthResponse {
 
+	@Override
+	protected void init() {
+		this.setAuthorizationCode(this.issuer.authorizationCode());
+	}
+	
 	public OAuthCodeResponse(OAuthValidator validator) {
 		super(validator);
 	}
@@ -21,8 +26,12 @@ public class OAuthCodeResponse extends OAuthResponse {
 	 * Set code
 	 * @param code
 	 */
-	public OAuthCodeResponse setCode(String code) {
-		this.putParameter(OAuthConsts.OAuth.OAUTH_CODE, code);
+	private OAuthCodeResponse setAuthorizationCode(String code) {
+		this.putParameter(OAuthConsts.OAuth.OAUTH_AUTHORIZATION_CODE, code);
 		return this;
+	}
+
+	public String getAuthorizationCode() {
+		return this.getParamter(OAuthConsts.OAuth.OAUTH_AUTHORIZATION_CODE);
 	}
 }

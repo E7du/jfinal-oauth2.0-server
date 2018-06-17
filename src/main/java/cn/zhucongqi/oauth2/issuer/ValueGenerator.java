@@ -5,17 +5,21 @@ package cn.zhucongqi.oauth2.issuer;
 
 import java.util.UUID;
 
+import com.jfinal.kit.HashKit;
+
 
 /**
  * 
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */
-public abstract class ValueGenerator {
+public final class ValueGenerator {
 	
     public String generateValue() {
         return generateValue(UUID.randomUUID().toString());
     }
 
-    public abstract String generateValue(String param);
+    public String generateValue(String param) {
+        return HashKit.sha256(UUID.fromString(UUID.nameUUIDFromBytes(param.getBytes()).toString()).toString());
+    }
 }

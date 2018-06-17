@@ -31,7 +31,7 @@ public class OAuthRequest {
 	private OAuthValidator validator = null;
 	
 	/**
-	 * init oauth request
+	 * init oauth request using AccessTokenRequestValidator
 	 * @param request
 	 */
 	public OAuthRequest(HttpServletRequest request) {

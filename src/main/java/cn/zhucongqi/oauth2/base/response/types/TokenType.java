@@ -15,8 +15,8 @@ public enum TokenType {
 
     private String tokenType;
 
-    TokenType(String grantType) {
-        this.tokenType = grantType;
+    TokenType(String tokenType) {
+        this.tokenType = tokenType;
     }
 
     @Override

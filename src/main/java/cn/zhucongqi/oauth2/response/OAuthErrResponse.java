@@ -14,6 +14,11 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
  */
 public class OAuthErrResponse extends OAuthResponse {
 
+	@Override
+	protected void init() {
+		
+	}
+	
 	public OAuthErrResponse(OAuthValidator validator) {
 		super(validator);
 	}
@@ -40,4 +45,5 @@ public class OAuthErrResponse extends OAuthResponse {
 		this.putParameter(OAuthError.OAUTH_ERROR_DESCRIPTION, errorDecription);
 		return this;
 	}
+
 }

@@ -144,7 +144,7 @@ public abstract class OAuthValidator {
         	this.clientSecret = clientSecret;
 		}
     	
-    	String code = this.request.getParameter(OAuthConsts.OAuth.OAUTH_CODE);
+    	String code = this.request.getParameter(OAuthConsts.OAuth.OAUTH_AUTHORIZATION_CODE);
     	if (StrKit.notBlank(code)) {
         	this.code = code;
 		}
