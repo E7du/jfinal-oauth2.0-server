@@ -13,7 +13,7 @@ public final class OAuthIssuerKit implements OAuthIssuer {
 
     private ValueGenerator vg = null;
 
-    private OAuthIssuerKit(ValueGenerator vg) {
+    public OAuthIssuerKit(ValueGenerator vg) {
         this.vg = vg;
     }
 
@@ -26,14 +26,14 @@ public final class OAuthIssuerKit implements OAuthIssuer {
     }
     
     public String accessToken() {
-        return vg.generateValue();
+        return this.vg.generateValue();
     }
 
     public String refreshToken() {
-        return vg.generateValue();
+        return this.vg.generateValue();
     }
 
     public String authorizationCode() {
-        return vg.generateValue();
+        return this.vg.generateValue();
     }
 }

@@ -10,6 +10,7 @@ import com.jfinal.ext.core.Service;
 import cn.zhucongqi.oauth2.base.services.OAuthApi;
 import cn.zhucongqi.oauth2.consts.OAuthRequestConsts;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
+import cn.zhucongqi.oauth2.kit.OAuthResponseKit;
 import cn.zhucongqi.oauth2.request.OAuthRequest;
 import cn.zhucongqi.oauth2.response.OAuthErrResponse;
 
@@ -89,9 +90,11 @@ public class OAuthService extends Service implements OAuthApi {
 		Object o = null;
 		try {
 			request.validate();
+			
+			o = OAuthResponseKit.tokenResp(request.getValidator());
+			
 		} catch (OAuthProblemException e) {
-			OAuthErrResponse error = new OAuthErrResponse(request.getValidator(), e);
-			o = error.parameters();
+			o = OAuthResponseKit.errorResp(request.getValidator(), e).parameters();
 		}
 		
 		this.controller.renderJson(o);

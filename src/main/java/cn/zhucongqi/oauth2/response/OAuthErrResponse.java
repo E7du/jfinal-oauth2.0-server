@@ -9,12 +9,6 @@ import cn.zhucongqi.oauth2.consts.OAuthError;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
 /**
- * error : ErrorConsts.CodeResponse <br/>
- * error_description : the erros repsonse description <br/>
- * scope : The scope of the access request; <br/>  
- * state : The exact value received from the
-         client.
- * 
  * @author Jobsz [zcq@zhucongqi.cn]
  * @version
  */

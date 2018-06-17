@@ -15,15 +15,15 @@ import cn.zhucongqi.oauth2.response.OAuthErrResponse;
  */
 public final class OAuthResponseKit {
 	
-	public static OAuthCodeResponse codeRep(OAuthValidator validator) {
+	public static OAuthCodeResponse codeResp(OAuthValidator validator) {
 		return (new OAuthCodeResponse(validator));
 	}
 	
-	public static OAuthAccessToken tokenRep(OAuthValidator validator) {
+	public static OAuthAccessToken tokenResp(OAuthValidator validator) {
 		return (new OAuthAccessToken(validator));
 	}
 
-	public static OAuthErrResponse errorRep(OAuthValidator validator, OAuthProblemException e) {
+	public static OAuthErrResponse errorResp(OAuthValidator validator, OAuthProblemException e) {
 		return (new OAuthErrResponse(validator, e));
 	}
 }
