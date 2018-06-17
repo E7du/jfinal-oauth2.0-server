@@ -8,7 +8,7 @@
 </head>
 <body>
 <form action="<%=request.getContextPath()%>/oauth2/access_token" method="post">
-<input type="hidden" value="authorization_code1" name="grant_type"/>
+<input type="hidden" value="authorization_code" name="grant_type"/>
 <input type="text" value="client_id_value" name="client_id"/>
 <input type="hidden" value="scope" name="scope"/>
 <input type="hidden" value="stateasadas" name="state"/>

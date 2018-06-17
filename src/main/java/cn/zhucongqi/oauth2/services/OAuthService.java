@@ -20,45 +20,26 @@ import cn.zhucongqi.oauth2.response.OAuthErrResponse;
  */
 public class OAuthService extends Service implements OAuthApi {
 
-//	private RequestType reqType = RequestType.GRANT_REQUEST;
-//	private ValueGenerator valGenerator = new MD5Generator();
-//	
-//	private void repErrorToClient(HttpServletRequest request, OAuthProblemException e) {
-//		// rep error to client
-//		OAuthErrResponse errorRep = OAuthResponseKit.errorRep(request, e);
-////		this.controller.getResponse().setStatus(e.getResponseStatus());
-//		this.log.error("authproblem =>"+e.getMessage());
-//		this.controller.renderJson(errorRep.param());
-//	}
-//	
-//	private void renderAccessToken(String scope, String state, HttpServletRequest request) {
-//		//generate access token
-//		OAuthIssuerKit issuer = null;//OAuthIssuerKit.();
-//		String accessToken = issuer.accessToken();
-//		String refreshToken = issuer.refreshToken();
-//		//store access token and refresh token and account
-//		//rep to client
-//		OAuthAccessToken accessTokenRep = OAuthResponseKit.tokenRep(request);
-//		accessTokenRep.setAccessToken(accessToken)
-//		.setExpiresIn(Consts.TOKEN_EXPIRES_IN)
-//		.setRefreshToken(refreshToken);
-//		this.controller.renderJson(accessTokenRep.param());
-//	}
-	
-//	public OAuthApi setReqType(RequestType reqType) {
-//		this.reqType = reqType;
-//		return this;
-//	}
-//	
-//	public OAuthApi setValGenerator(ValueGenerator valGenerator) {
-//		this.valGenerator = valGenerator;
-//		return this;
-//	}
-	
+	private void respClient(int requestType) {
+		HttpServletRequest req = this.controller.getRequest();
+		OAuthRequest request = new OAuthRequest(req, requestType);
+		Object o = null;
+		try {
+			request.validate();
+			
+			o = OAuthResponseKit.tokenResp(request.getValidator());
+		} catch (OAuthProblemException e) {
+			e.printStackTrace();
+			this.controller.onExceptionError(e);
+			OAuthErrResponse error = new OAuthErrResponse(request.getValidator(), e);
+			o = error.parameters();
+		}
+		this.controller.renderJson(o);
+	}
+ 	
 	@Override
 	public void authrize() {
-		//HttpServletRequest request = this.controller.getRequest();
-		
+		this.respClient(OAuthRequestConsts.AUTHORIZATION_REQUEST);
 	}
 	
 	@Override
@@ -68,41 +49,17 @@ public class OAuthService extends Service implements OAuthApi {
 
 	@Override
 	public void accessToken() {
-		HttpServletRequest req = this.controller.getRequest();
-		OAuthRequest request = new OAuthRequest(req, OAuthRequestConsts.ACCESS_TOKEN_REQUEST);
-		Object o = null;
-		try {
-			request.validate();
-		} catch (OAuthProblemException e) {
-			e.printStackTrace();
-			this.controller.onExceptionError(e);
-			OAuthErrResponse error = new OAuthErrResponse(request.getValidator(), e);
-			o = error.parameters();
-		}
-		
-		this.controller.renderJson(o);
+		this.respClient(OAuthRequestConsts.ACCESS_TOKEN_REQUEST);
 	}
 	
 	@Override
 	public void secureAccessToken() {
-		HttpServletRequest req = this.controller.getRequest();
-		OAuthRequest request = new OAuthRequest(req, OAuthRequestConsts.PASSOWRD_CREDENTIAL_REQUEST);
-		Object o = null;
-		try {
-			request.validate();
-			
-			o = OAuthResponseKit.tokenResp(request.getValidator());
-			
-		} catch (OAuthProblemException e) {
-			o = OAuthResponseKit.errorResp(request.getValidator(), e).parameters();
-		}
-		
-		this.controller.renderJson(o);
+		this.respClient(OAuthRequestConsts.PASSOWRD_CREDENTIAL_REQUEST);
 	}
 
 	@Override
 	public void refreshToken() {
-		
+		this.respClient(OAuthRequestConsts.REFRESH_TOKEN_REQUEST);
 	}
 
 }
