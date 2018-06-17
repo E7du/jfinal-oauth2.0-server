@@ -4,7 +4,6 @@
 package cn.zhucongqi.oauth2.response;
 
 import cn.zhucongqi.oauth2.base.response.OAuthResponse;
-import cn.zhucongqi.oauth2.base.response.types.TokenType;
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.Consts;
 import cn.zhucongqi.oauth2.consts.OAuthConsts;
@@ -90,42 +89,6 @@ public class OAuthAccessToken extends OAuthResponse {
 	 */
 	public String getExpriresIn() {
 		return this.getParamter(OAuthConsts.OAuth.OAUTH_EXPIRES_IN);
-	}
-	
-	/**
-	 * Set Token Type
-	 * @param tokenType
-	 * @return
-	 */
-	public OAuthAccessToken setTokenType(TokenType tokenType) {
-		this.putParameter(OAuthConsts.OAuth.OAUTH_TOKEN_TYPE, tokenType.toString());
-		return this;
-	}
-	
-	/**
-	 * Get Token Type
-	 * @return
-	 */
-	public TokenType getTokenType() {
-		return TokenType.valueOf(this.getParamter(OAuthConsts.OAuth.OAUTH_TOKEN_TYPE));
-	}
-	
-	/**
-	 * Set Example Parameter
-	 * @param exampleParamter
-	 * @return
-	 */
-	public OAuthAccessToken setExampleParamter(String exampleParamter) {
-		this.putParameter(OAuthConsts.OAuth.OAUTH_EXAMPLE_PARAMETER, exampleParamter);
-		return this;
-    }
-	
-	/**
-	 * Get Example Parameter
-	 * @return
-	 */
-	public String getExampleParameter() {
-		return this.getParamter(OAuthConsts.OAuth.OAUTH_EXAMPLE_PARAMETER);
 	}
 	
 }
