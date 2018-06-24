@@ -7,14 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jfinal.ext.core.Service;
 
-import cn.zhucongqi.oauth2.base.clientcredentials.OAuthClientCredentials;
 import cn.zhucongqi.oauth2.base.services.OAuthApi;
-import cn.zhucongqi.oauth2.clientcredentials.AccessTokenClientCredentials;
-import cn.zhucongqi.oauth2.clientcredentials.AuthorizationClientCredentials;
-import cn.zhucongqi.oauth2.clientcredentials.ClientCredentials;
-import cn.zhucongqi.oauth2.clientcredentials.ImplicitClientCredentials;
 import cn.zhucongqi.oauth2.clientcredentials.PasswordClientCredentials;
-import cn.zhucongqi.oauth2.clientcredentials.RefreshTokenClientCredentials;
 import cn.zhucongqi.oauth2.consts.OAuthRequestConsts;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.kit.OAuthResponseKit;
@@ -32,36 +26,34 @@ public class OAuthService extends Service implements OAuthApi {
 		Object o = null;
 		OAuthRequest request = null;
 		try {
-			OAuthClientCredentials clientCredential = null;
 			switch (requestType) {
 			case OAuthRequestConsts.AUTHORIZATION_REQUEST: {
-				clientCredential = new AuthorizationClientCredentials();
+				request = OAuthRequest.authorizatonRequest(req, new PasswordClientCredentials());
 			}
 				break;
 
 			case OAuthRequestConsts.ACCESS_TOKEN_REQUEST: {
-				clientCredential = new AccessTokenClientCredentials();
+				request = OAuthRequest.accessTokenRequest(req, new PasswordClientCredentials());
 			}
 				break;
 			case OAuthRequestConsts.CLIENT_CREDENTIAL_REQUEST: {
-				clientCredential = new ClientCredentials();
+				request = OAuthRequest.clientCredentialRequest(req, new PasswordClientCredentials());
 			}
 				break;
 			case OAuthRequestConsts.IMPLICIT_REQUEST: {
-				clientCredential = new ImplicitClientCredentials();
+				request = OAuthRequest.implicitRequest(req, new PasswordClientCredentials());
 			}
 				break;
 			case OAuthRequestConsts.PASSOWRD_CREDENTIAL_REQUEST: {
-				clientCredential = new PasswordClientCredentials();
+				request = OAuthRequest.passwordCredentialRequest(req, new PasswordClientCredentials());
 			}
 				break;
 			case OAuthRequestConsts.REFRESH_TOKEN_REQUEST: {
-				clientCredential = new RefreshTokenClientCredentials();
+				request = OAuthRequest.refreshTokenRequest(req, new PasswordClientCredentials());
 			}
 				break;
 			}
 
-			request = new OAuthRequest(req, requestType, clientCredential);
 			request.validate();
 			
 			o = OAuthResponseKit.tokenResp(request.getValidator());
