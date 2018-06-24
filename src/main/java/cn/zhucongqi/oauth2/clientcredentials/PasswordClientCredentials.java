@@ -12,8 +12,9 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 public class PasswordClientCredentials implements OAuthClientCredentials {
 
 	@Override
-	public void validateClientCredentials(OAuthValidator validator) throws OAuthProblemException {
+	public Object validateClientCredentials(OAuthValidator validator) throws OAuthProblemException {
 		//TODO build your own Password client credentials code in here	
+		return null;
 	}
 
 }
