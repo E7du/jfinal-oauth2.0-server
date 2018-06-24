@@ -7,6 +7,8 @@ package cn.zhucongqi.oauth2.exception;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.jfinal.kit.StrKit;
 
 /**
@@ -35,11 +37,11 @@ public class OAuthProblemException extends IllegalArgumentException {
     }
 
     public static OAuthProblemException error(String error) {
-        return new OAuthProblemException(error);
+        return new OAuthProblemException(error).responseStatus(HttpServletResponse.SC_FORBIDDEN);
     }
 
     public static OAuthProblemException error(String error, String description) {
-        return new OAuthProblemException(error, description);
+        return new OAuthProblemException(error, description).responseStatus(HttpServletResponse.SC_FORBIDDEN);
     }
 
     public OAuthProblemException description(String description) {
