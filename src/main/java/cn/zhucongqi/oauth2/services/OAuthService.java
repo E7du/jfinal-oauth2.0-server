@@ -54,7 +54,7 @@ public class OAuthService extends Service implements OAuthApi {
 				break;
 			}
 
-			request.validate();
+			request.validate();//push to o: o = request.validate();
 			
 			o = OAuthResponseKit.tokenResp(request.getValidator());
 		} catch (OAuthProblemException e) {
