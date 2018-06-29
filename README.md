@@ -11,3 +11,68 @@
 ​
 
 demo [http://localhost:8080/jfinal-oauth2.0-server/index.jsp](http://localhost:8080/jfinal-oauth2.0-server/index.jsp)
+
+
+#自定义clientcredentials
+- implements OAuthClientCredentials
+
+```java
+public class PasswordClientCredentials implements OAuthClientCredentials {
+
+	@Override
+	public Object validateClientCredentials(OAuthValidator validator) throws OAuthProblemException {
+		//TODO build your own Password client credentials code in here	
+		 OAuthAccessToken accessToken =  OAuthResponseKit.tokenResp(validator);
+		 //put other paramters
+		 accessToken.putExtenstionParameter("other", "other value");
+		 return accessToken.parameters();
+	}
+}
+```
+- 使用
+
+```java
+private void respClient(int requestType) {
+		HttpServletRequest req = this.controller.getRequest();
+		Object o = null;
+		OAuthRequest request = null;
+		try {
+			switch (requestType) {
+			case OAuthRequestConsts.AUTHORIZATION_REQUEST: {
+				request = OAuthRequest.authorizatonRequest(req, new PasswordClientCredentials());
+			}
+				break;
+
+			case OAuthRequestConsts.ACCESS_TOKEN_REQUEST: {
+				request = OAuthRequest.accessTokenRequest(req, new PasswordClientCredentials());
+			}
+				break;
+			case OAuthRequestConsts.CLIENT_CREDENTIAL_REQUEST: {
+				request = OAuthRequest.clientCredentialRequest(req, new PasswordClientCredentials());
+			}
+				break;
+			case OAuthRequestConsts.IMPLICIT_REQUEST: {
+				request = OAuthRequest.implicitRequest(req, new PasswordClientCredentials());
+			}
+				break;
+			case OAuthRequestConsts.PASSOWRD_CREDENTIAL_REQUEST: {
+				request = OAuthRequest.passwordCredentialRequest(req, new PasswordClientCredentials());
+			}
+				break;
+			case OAuthRequestConsts.REFRESH_TOKEN_REQUEST: {
+				request = OAuthRequest.refreshTokenRequest(req, new PasswordClientCredentials());
+			}
+				break;
+			}
+
+			o = request.validate();//push to o: o = request.validate();
+			
+		} catch (OAuthProblemException e) {
+			e.printStackTrace();
+			this.controller.onExceptionError(e);
+			OAuthErrResponse error = new OAuthErrResponse(request.getValidator(), e);
+			o = error.parameters();
+		}
+		this.controller.renderJson(o);
+	}
+```

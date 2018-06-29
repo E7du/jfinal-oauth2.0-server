@@ -14,7 +14,7 @@ public class ImplicitClientCredentials implements OAuthClientCredentials {
 	@Override
 	public Object validateClientCredentials(OAuthValidator validator) throws OAuthProblemException {
 		//TODO build your own ImplicitClientCredentials client credentials code in here
-		return null;
+		return (new String("ImplicitClientCredentials"));
 	}
 	
 }

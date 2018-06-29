@@ -14,7 +14,7 @@ public class RefreshTokenClientCredentials implements OAuthClientCredentials {
 	@Override
 	public Object validateClientCredentials(OAuthValidator validator) throws OAuthProblemException {
 		//TODO build your own RefreshTokenClientCredentials client credentials code in here
-		return null;
+		return (new String("RefreshTokenClientCredentials"));
 	}
 	
 }

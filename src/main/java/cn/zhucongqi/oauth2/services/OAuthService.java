@@ -11,7 +11,6 @@ import cn.zhucongqi.oauth2.base.services.OAuthApi;
 import cn.zhucongqi.oauth2.clientcredentials.PasswordClientCredentials;
 import cn.zhucongqi.oauth2.consts.OAuthRequestConsts;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
-import cn.zhucongqi.oauth2.kit.OAuthResponseKit;
 import cn.zhucongqi.oauth2.request.OAuthRequest;
 import cn.zhucongqi.oauth2.response.OAuthErrResponse;
 
@@ -54,9 +53,8 @@ public class OAuthService extends Service implements OAuthApi {
 				break;
 			}
 
-			request.validate();//push to o: o = request.validate();
+			o = request.validate();//push to o: o = request.validate();
 			
-			o = OAuthResponseKit.tokenResp(request.getValidator());
 		} catch (OAuthProblemException e) {
 			e.printStackTrace();
 			this.controller.onExceptionError(e);

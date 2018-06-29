@@ -14,7 +14,7 @@ public class ClientCredentials implements OAuthClientCredentials {
 	@Override
 	public Object validateClientCredentials(OAuthValidator validator) throws OAuthProblemException {
 		//TODO build your own client credentials code in here
-		return null;
+		return (new String("ClientCredentials"));
 	}
 	
 }
