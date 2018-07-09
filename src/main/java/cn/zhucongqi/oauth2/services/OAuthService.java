@@ -11,6 +11,8 @@ import cn.zhucongqi.oauth2.base.services.OAuthApi;
 import cn.zhucongqi.oauth2.clientcredentials.PasswordClientCredentials;
 import cn.zhucongqi.oauth2.consts.OAuthRequestConsts;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
+import cn.zhucongqi.oauth2.kit.OAuthRequestKit;
+import cn.zhucongqi.oauth2.request.OAuthHttpServletRequest;
 import cn.zhucongqi.oauth2.request.OAuthRequest;
 import cn.zhucongqi.oauth2.response.OAuthErrResponse;
 
@@ -21,7 +23,11 @@ import cn.zhucongqi.oauth2.response.OAuthErrResponse;
 public class OAuthService extends Service implements OAuthApi {
 
 	private void respClient(int requestType) {
-		HttpServletRequest req = this.controller.getRequest();
+		HttpServletRequest req1 = this.controller.getRequest();
+		
+		OAuthHttpServletRequest req = new OAuthHttpServletRequest();
+		OAuthRequestKit.cp(req1, req);
+		
 		Object o = null;
 		OAuthRequest request = null;
 		try {
