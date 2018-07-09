@@ -21,6 +21,11 @@ public class OAuth2Controller extends ControllerExt {
 	
 	//using ControllerExt auto init the service instance
 	private OAuthService oauthService;
+	
+	@Override
+	protected void onInit() {
+		
+	}
 
 	@ActionKey(ActionUrls.AUTHORIZE_URL)
 	public void onAuthorize() {
