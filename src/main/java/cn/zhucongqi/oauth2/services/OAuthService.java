@@ -3,8 +3,6 @@
  */
 package cn.zhucongqi.oauth2.services;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.jfinal.ext.core.Service;
 
 import cn.zhucongqi.oauth2.base.services.OAuthApi;
@@ -23,10 +21,8 @@ import cn.zhucongqi.oauth2.response.OAuthErrResponse;
 public class OAuthService extends Service implements OAuthApi {
 
 	private void respClient(int requestType) {
-		HttpServletRequest req1 = this.controller.getRequest();
-		
 		OAuthHttpServletRequest req = new OAuthHttpServletRequest();
-		OAuthRequestKit.cp(req1, req);
+		OAuthRequestKit.cp(this.controller.getRequest(), req);
 		
 		Object o = null;
 		OAuthRequest request = null;
