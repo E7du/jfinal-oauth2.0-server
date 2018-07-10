@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>cn.zhucongqi</groupId>
 			<artifactId>joauth2.0</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfinal</groupId>

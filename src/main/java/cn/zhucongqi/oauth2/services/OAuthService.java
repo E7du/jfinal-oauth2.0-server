@@ -9,7 +9,6 @@ import cn.zhucongqi.oauth2.base.services.OAuthApi;
 import cn.zhucongqi.oauth2.clientcredentials.PasswordClientCredentials;
 import cn.zhucongqi.oauth2.consts.OAuthRequestConsts;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
-import cn.zhucongqi.oauth2.kit.OAuthRequestKit;
 import cn.zhucongqi.oauth2.request.OAuthHttpServletRequest;
 import cn.zhucongqi.oauth2.request.OAuthRequest;
 import cn.zhucongqi.oauth2.response.OAuthErrResponse;
@@ -20,10 +19,7 @@ import cn.zhucongqi.oauth2.response.OAuthErrResponse;
  */
 public class OAuthService extends Service implements OAuthApi {
 
-	private void respClient(int requestType) {
-		OAuthHttpServletRequest req = new OAuthHttpServletRequest();
-		OAuthRequestKit.cp(this.controller.getRequest(), req);
-		
+	private Object respClient(int requestType, OAuthHttpServletRequest req) {
 		Object o = null;
 		OAuthRequest request = null;
 		try {
@@ -63,32 +59,32 @@ public class OAuthService extends Service implements OAuthApi {
 			OAuthErrResponse error = new OAuthErrResponse(request.getValidator(), e);
 			o = error.parameters();
 		}
-		this.controller.renderJson(o);
+		return o;
 	}
  	
 	@Override
-	public void authrize() {
-		this.respClient(OAuthRequestConsts.AUTHORIZATION_REQUEST);
+	public Object authrize(OAuthHttpServletRequest request) {
+		return this.respClient(OAuthRequestConsts.AUTHORIZATION_REQUEST, request);
 	}
 	
 	@Override
-	public void authrizeCode() {
-		
+	public Object authrizeCode(OAuthHttpServletRequest request) {
+		return null;
 	}
 
 	@Override
-	public void accessToken() {
-		this.respClient(OAuthRequestConsts.ACCESS_TOKEN_REQUEST);
+	public Object accessToken(OAuthHttpServletRequest request) {
+		return this.respClient(OAuthRequestConsts.ACCESS_TOKEN_REQUEST, request);
 	}
 	
 	@Override
-	public void secureAccessToken() {
-		this.respClient(OAuthRequestConsts.PASSOWRD_CREDENTIAL_REQUEST);
+	public Object secureAccessToken(OAuthHttpServletRequest request) {
+		return this.respClient(OAuthRequestConsts.PASSOWRD_CREDENTIAL_REQUEST, request);
 	}
 
 	@Override
-	public void refreshToken() {
-		this.respClient(OAuthRequestConsts.REFRESH_TOKEN_REQUEST);
+	public Object refreshToken(OAuthHttpServletRequest request) {
+		return this.respClient(OAuthRequestConsts.REFRESH_TOKEN_REQUEST, request);
 	}
 
 }
