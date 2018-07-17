@@ -32,8 +32,7 @@ public class PasswordClientCredentials implements OAuthClientCredentials {
 - 使用
 
 ```java
-private void respClient(int requestType) {
-		HttpServletRequest req = this.controller.getRequest();
+private Object respClient(int requestType, OAuthHttpServletRequest req) {
 		Object o = null;
 		OAuthRequest request = null;
 		try {
@@ -73,6 +72,6 @@ private void respClient(int requestType) {
 			OAuthErrResponse error = new OAuthErrResponse(request.getValidator(), e);
 			o = error.parameters();
 		}
-		this.controller.renderJson(o);
+		return o;
 	}
 ```
