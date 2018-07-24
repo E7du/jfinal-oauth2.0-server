@@ -23,8 +23,6 @@ import com.jfinal.config.Routes;
 import com.jfinal.ext.config.JFinalConfigExt;
 import com.jfinal.template.Engine;
 
-import cn.zhucongqi.oauth2.data.DataKit;
-
 /**
  * 
  * @author Jobsz [zcq@zhucongqi.cn]
@@ -34,7 +32,6 @@ public class Config extends JFinalConfigExt {
 	
 	public void afterJFinalStarted(){
 		//初始化数据
-		DataKit.init();
 	}
 
 	@Override

@@ -17,6 +17,7 @@ package cn.zhucongqi.oauth2.services;
 
 import com.jfinal.ext.core.Service;
 
+import cn.zhucongqi.oauth2.base.response.OAuthResponse;
 import cn.zhucongqi.oauth2.base.services.OAuthApi;
 import cn.zhucongqi.oauth2.clientcredentials.PasswordClientCredentials;
 import cn.zhucongqi.oauth2.consts.OAuthRequestConsts;
@@ -31,8 +32,8 @@ import cn.zhucongqi.oauth2.response.OAuthErrResponse;
  */
 public class OAuthService extends Service implements OAuthApi {
 
-	private Object respClient(int requestType, OAuthHttpServletRequest req) {
-		Object o = null;
+	private OAuthResponse respClient(int requestType, OAuthHttpServletRequest req) {
+		OAuthResponse o = null;
 		OAuthRequest request = null;
 		try {
 			switch (requestType) {
@@ -69,33 +70,33 @@ public class OAuthService extends Service implements OAuthApi {
 			e.printStackTrace();
 			this.controller.onExceptionError(e);
 			OAuthErrResponse error = new OAuthErrResponse(request.getValidator(), e);
-			o = error.parameters();
+			o = error;
 		}
 		return o;
 	}
  	
 	@Override
-	public Object authrize(OAuthHttpServletRequest request) {
+	public OAuthResponse authrize(OAuthHttpServletRequest request) {
 		return this.respClient(OAuthRequestConsts.AUTHORIZATION_REQUEST, request);
 	}
 	
 	@Override
-	public Object authrizeCode(OAuthHttpServletRequest request) {
+	public OAuthResponse authrizeCode(OAuthHttpServletRequest request) {
 		return null;
 	}
 
 	@Override
-	public Object accessToken(OAuthHttpServletRequest request) {
+	public OAuthResponse accessToken(OAuthHttpServletRequest request) {
 		return this.respClient(OAuthRequestConsts.ACCESS_TOKEN_REQUEST, request);
 	}
 	
 	@Override
-	public Object secureAccessToken(OAuthHttpServletRequest request) {
+	public OAuthResponse secureAccessToken(OAuthHttpServletRequest request) {
 		return this.respClient(OAuthRequestConsts.PASSOWRD_CREDENTIAL_REQUEST, request);
 	}
 
 	@Override
-	public Object refreshToken(OAuthHttpServletRequest request) {
+	public OAuthResponse refreshToken(OAuthHttpServletRequest request) {
 		return this.respClient(OAuthRequestConsts.REFRESH_TOKEN_REQUEST, request);
 	}
 

@@ -16,6 +16,7 @@
 package cn.zhucongqi.oauth2.clientcredentials;
 
 import cn.zhucongqi.oauth2.base.clientcredentials.OAuthClientCredentials;
+import cn.zhucongqi.oauth2.base.response.OAuthResponse;
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 
@@ -27,9 +28,9 @@ import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 public class ImplicitClientCredentials implements OAuthClientCredentials {
 
 	@Override
-	public Object validateClientCredentials(OAuthValidator validator) throws OAuthProblemException {
+	public OAuthResponse validateClientCredentials(OAuthValidator validator) throws OAuthProblemException {
 		//TODO build your own ImplicitClientCredentials client credentials code in here
-		return (new String("ImplicitClientCredentials"));
+		return null;
 	}
 	
 }

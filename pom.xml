@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>cn.zhucongqi</groupId>
 			<artifactId>joauth2.0</artifactId>
-			<version>1.0.3</version>
+			<version>1.0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfinal</groupId>
@@ -37,9 +37,9 @@
 			<version>3.0.4</version>
 		</dependency>
 		<dependency>
-			<groupId>com.jfinal</groupId>
-			<artifactId>jfinal</artifactId>
-			<version>3.4</version>
+			<groupId>cn.zhucongqi</groupId>
+			<artifactId>e7du-jfinal</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
   	  		<groupId>javax.servlet</groupId>
